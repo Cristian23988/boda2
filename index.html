@@ -34,16 +34,22 @@
     }
 
     /* Hero */
+	
     .hero {
       position: relative;
-      min-height: 100vh;
+      min-height: 100svh;
       display: grid;
       place-items: center;
       text-align: center;
       overflow: hidden;
-      background: linear-gradient(rgba(30,20,17,0.35), rgba(30,20,17,0.35)),
-        url('Inicio_files/fotos/fotoInicio.jpg') center/cover no-repeat fixed;
-    }
+  background-image:
+    linear-gradient(rgba(30,20,17,0.45), rgba(30,20,17,0.45)),
+    url('Inicio_files/fotos/fotoInicio.jpg');
+
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
     .hero .brand {
       font-family: 'Playfair Display', serif;
@@ -233,7 +239,9 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: url('Inicio_files/fotos/foto_gif.gif') center center / cover no-repeat;
+  background: url('https://github.com/Cristian23988/boda2/releases/download/v1.0/foto_gif.gif')
+    center center / cover no-repeat;
+  will-change: transform;
   filter: brightness(0.55);
   transform: scale(1.05);
 }
@@ -261,6 +269,11 @@
   font-size: clamp(15px, 2.5vw, 18px);
   color: var(--text);
   line-height: 1.7;
+}
+@media (max-width: 768px) {
+  .hero {
+    background-position: center top;
+  }
 }
 
   </style>
@@ -416,16 +429,16 @@
 
     <!-- Fotos locales -->
   <a href="Inicio_files/fotos/foto1.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto1.jpg" alt="Foto 1">
+    <img src="Inicio_files/fotos/foto5.JPEG" alt="Foto 1">
   </a>
   <a href="Inicio_files/fotos/foto2.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto2.jpg" alt="Foto 2">
+    <img src="Inicio_files/fotos/foto6.JPEG" alt="Foto 2">
   </a>
   <a href="Inicio_files/fotos/foto3.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto3.jpg" alt="Foto 3">
+    <img src="Inicio_files/fotos/foto7.JPG" alt="Foto 3">
   </a>
   <a href="Inicio_files/fotos/foto4.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto4.jpg" alt="Foto 3">
+    <img src="Inicio_files/fotos/foto8.jpg" alt="Foto 3">
   </a>
     <!-- Fotos locales -->
   <a href="Inicio_files/fotos/foto1.jpg" data-fancybox="gal">
