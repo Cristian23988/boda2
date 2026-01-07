@@ -687,6 +687,14 @@
     0 25px 80px rgba(0,0,0,.75);
 }
 
+@media (max-width: 768px){
+  /* Solo afecta a la hero de inicio */
+  .hero-mobile-fix {
+    background-attachment: scroll !important; /* 🔑 quita el zoom extraño en móviles */
+    background-size: cover !important;
+    background-position: center top !important;
+  }
+}
 
 
   </style>
@@ -713,33 +721,32 @@
   </nav>
 
   <!-- HERO -->
-  <header id="home" class="hero">
-    <div class="container">
-      <div class="brand animate__animated animate__fadeIn">
-        <div class="names">Cristian & Elizabeth</div>
-        <div class="subtitle">Nos encantaría celebrar contigo nuestro gran día</div>
-        <div class="date-badge">26 de abril de 2026 • Medellín</div>
-        <div class="mt-4">
-            <!-- AUDIO PLAYER -->
-          <section id="musica" class="section">
-  <div class="container text-center">
-    <h2 class="section-title">Nuestra Canción</h2>
-    <p class="lead-muted mb-4">Haz clic para acompañar la invitación con nuestra melodía.</p>
+<header id="home" class="hero hero-mobile-fix">
+  <div class="container">
+    <div class="brand animate__animated animate__fadeIn">
+      <div class="names">Cristian & Elizabeth</div>
+      <div class="subtitle">Nos encantaría celebrar contigo nuestro gran día</div>
+      <div class="date-badge">26 de abril de 2026 • Medellín</div>
+      <div class="mt-4">
+          <!-- AUDIO PLAYER -->
+        <section id="musica" class="section">
+          <div class="container text-center">
+            <h2 class="section-title">Nuestra Canción</h2>
+            <p class="lead-muted mb-4">Haz clic para acompañar la invitación con nuestra melodía.</p>
 
-    <!-- Botón bonito -->
-    <button id="playBtn" class="btn btn-accent">
-      <i class="las la-music me-2"></i> Reproducir música
-    </button>
+            <button id="playBtn" class="btn btn-accent">
+              <i class="las la-music me-2"></i> Reproducir música
+            </button>
 
-    <!-- Elemento de audio oculto -->
-    <audio id="weddingAudio" src="Inicio_files/Instrumental_Mix.mp3"></audio>
-	<p class="lead-muted mb-4">&nbsp;</p>
-  </div>
-</section>
-        </div>
+            <audio id="weddingAudio" src="Inicio_files/Instrumental_Mix.mp3"></audio>
+            <p class="lead-muted mb-4">&nbsp;</p>
+          </div>
+        </section>
       </div>
     </div>
-  </header>
+  </div>
+</header>
+
 
 <div class="section-separator"></div>
 
