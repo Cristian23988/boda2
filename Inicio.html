@@ -693,30 +693,39 @@
     background-attachment: scroll !important; /* 🔑 quita el zoom extraño en móviles */
     background-size: cover !important;
     background-position: center top !important;
-	position: relative; /* contenedor padre necesario */
-    overflow: hidden;
-  }
-  
-
-  .hero-mobile-fix .hero-bg {
-    position: sticky;   /* simula background-attachment: fixed */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("Inicio_files/fotos/fotoInicio.jpg");
-    background-size: cover;
-    background-position: center top;
-    z-index: 0; /* queda detrás de las letras */
-  }
-
-  .hero-mobile-fix .container {
-    position: relative; /* letras y contenido encima */
-    z-index: 2;
   }
 }
-
+/* Hero fondo fijo para web y móvil */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
 }
+
+.hero-bg {
+  position: fixed;         /* 🔑 Fijo en toda la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("Inicio_files/fotos/fotoInicio.jpg") center / cover no-repeat;
+  z-index: -1;             /* detrás de todo el contenido */
+}
+
+/* Capa de efecto (gradiente y sombras) */
+.hero::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.12), transparent 50%),
+    linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55));
+  z-index: 0; 
+}
+
 
 
   </style>
@@ -743,15 +752,17 @@
   </nav>
 
   <!-- HERO -->
-<header id="home" class="hero hero-mobile-fix">
-  <div class="hero-bg"></div> <!-- ESTE ES EL NUEVO CONTENEDOR DE FONDO -->
+<header id="home" class="hero">
+  <!-- FONDO FIJO -->
+  <div class="hero-bg"></div>
+
   <div class="container">
     <div class="brand animate__animated animate__fadeIn">
       <div class="names">Cristian & Elizabeth</div>
       <div class="subtitle">Nos encantaría celebrar contigo nuestro gran día</div>
       <div class="date-badge">26 de abril de 2026 • Medellín</div>
       <div class="mt-4">
-          <!-- AUDIO PLAYER -->
+        <!-- AUDIO PLAYER -->
         <section id="musica" class="section">
           <div class="container text-center">
             <h2 class="section-title">Nuestra Canción</h2>
