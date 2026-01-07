@@ -687,13 +687,31 @@
     0 25px 80px rgba(0,0,0,.75);
 }
 
-@media (max-width: 768px){
-  /* Solo afecta a la hero de inicio */
+/* SOLO MÓVIL: fondo fijo hero */
+@media (max-width: 768px) {
   .hero-mobile-fix {
-    background-attachment: scroll !important; /* 🔑 quita el zoom extraño en móviles */
-    background-size: cover !important;
-    background-position: center top !important;
+    position: relative; /* contenedor padre necesario */
+    overflow: hidden;
   }
+
+  .hero-mobile-fix .hero-bg {
+    position: sticky;   /* simula background-attachment: fixed */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("Inicio_files/fotos/fotoInicio.jpg");
+    background-size: cover;
+    background-position: center top;
+    z-index: 0; /* queda detrás de las letras */
+  }
+
+  .hero-mobile-fix .container {
+    position: relative; /* letras y contenido encima */
+    z-index: 2;
+  }
+}
+
 }
 
 
@@ -722,6 +740,7 @@
 
   <!-- HERO -->
 <header id="home" class="hero hero-mobile-fix">
+  <div class="hero-bg"></div> <!-- ESTE ES EL NUEVO CONTENEDOR DE FONDO -->
   <div class="container">
     <div class="brand animate__animated animate__fadeIn">
       <div class="names">Cristian & Elizabeth</div>
