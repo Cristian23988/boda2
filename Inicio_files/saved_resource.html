@@ -1,0 +1,209 @@
+
+<!-- saved from url=(0259)https://722172767-atari-embeds.googleusercontent.com/embeds/16cb204cf3a9d4d223a0a3fd8b0eec5d/inner-frame-minified.html?jsh=m%3B%2F_%2Fscs%2Fabc-static%2F_%2Fjs%2Fk%3Dgapi.lb.es.QTF29PhqQQo.O%2Fd%3D1%2Frs%3DAHpOoo-qkn0Lr91ERdr5i_CA-sh-_pc3Yg%2Fm%3D__features__ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--<base target="_blank">--><base href="." target="_blank"><!-- Importar fuente Sriracha -->
+<link href="./css2" rel="stylesheet">
+
+<!-- CONTENEDOR FIJO -->
+</head><body><div style="width:100%; max-width:100%; overflow:hidden;">
+
+  <!-- WRAPPER GENERAL -->
+  <div class="wrapper">
+
+    <!-- Calendario -->
+    <div class="calendar-wrapper">
+      <div class="calendar">
+        <div class="month-year" id="monthYear">Abril 2026</div>
+        <div class="weekdays">
+          <div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+        </div>
+        <div class="days" id="calDays"><div class="empty"></div><div class="empty"></div><div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div><div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div><div class="day">25</div><div class="day highlight">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div></div>
+      </div>
+    </div>
+
+    <!-- Contador -->
+    <div class="countdown-wrapper">
+      <div id="wedding-countdown">
+        <div class="count-card">
+          <div class="title">Cuenta regresiva</div>
+          <div class="time-box">
+            <div class="unit"><div class="number" id="cd-days">109</div><div class="label">Días</div></div>
+            <div class="unit"><div class="number" id="cd-hours">1</div><div class="label">Horas</div></div>
+            <div class="unit"><div class="number" id="cd-minutes">7</div><div class="label">Minutos</div></div>
+            <div class="unit"><div class="number" id="cd-seconds">37</div><div class="label">Segundos</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+body, .calendar, .count-card, .wrapper {
+  font-family: 'Sriracha', cursive;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+/* ===== CALENDARIO ===== */
+.calendar-wrapper {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid rgba(184,92,56,0.4);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden; /* 🔑 fuerza que no aparezca scroll */
+}
+
+.calendar {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.month-year {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 22px;
+  color: #b85c38;
+}
+
+.weekdays, .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.weekdays div { font-weight: 600; color: #777; }
+
+.day, .empty {
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.highlight {
+  background: #b85c38;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 50%;
+}
+
+/* ===== CONTADOR ===== */
+.countdown-wrapper {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid rgba(184,92,56,0.4);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden; /* 🔑 igual aquí */
+}
+
+.count-card { text-align: center; }
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #b85c38;
+}
+
+.time-box {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.unit { padding: 4px; min-width: 50px; }
+.number { font-size: 22px; font-weight: 700; color: #333; }
+.label { font-size: 14px; color: #777; }
+
+/* ===== MOBILE ===== */
+@media (max-width: 480px) {
+  .month-year { font-size: 16px; margin-bottom: 4px; }
+  .weekdays, .days { font-size: 12px; gap: 2px; }
+  .day, .empty { padding: 2px; min-width: auto; }
+  .title { font-size: 16px; }
+  .number { font-size: 16px; }
+  .label { font-size: 11px; }
+  .time-box { gap: 4px; }
+  .unit { min-width: 42px; }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dia  = 26;
+  const mes  = 4;
+  const año  = 2026;
+
+  const monthNames = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto",
+                      "Septiembre","Octubre","Noviembre","Diciembre"];
+  const monthYear = document.getElementById("monthYear");
+  const daysContainer = document.getElementById("calDays");
+
+  monthYear.textContent = `${monthNames[mes-1]} ${año}`;
+
+  const firstDay = new Date(año, mes-1, 1).getDay();
+  const totalDays = new Date(año, mes, 0).getDate();
+  const offset = (firstDay === 0 ? 6 : firstDay - 1);
+
+  for (let i = 0; i < offset; i++) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    daysContainer.appendChild(empty);
+  }
+
+  for (let d = 1; d <= totalDays; d++) {
+    const dayElem = document.createElement("div");
+    dayElem.textContent = d;
+    dayElem.className = "day";
+    if (d === dia) dayElem.classList.add("highlight");
+    daysContainer.appendChild(dayElem);
+  }
+
+  const target = new Date(año, mes - 1, dia, 0, 0, 0);
+
+  function updateCountdown() {
+    const now  = new Date();
+    const diff = target.getTime() - now.getTime();
+
+    if (diff > 0) {
+      const d = Math.floor(diff / (1000*60*60*24));
+      const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+      const s = Math.floor((diff % (1000*60)) / 1000);
+
+      document.getElementById('cd-days').textContent = d;
+      document.getElementById('cd-hours').textContent = h;
+      document.getElementById('cd-minutes').textContent = m;
+      document.getElementById('cd-seconds').textContent = s;
+    } else {
+      document.querySelector('#wedding-countdown .count-card').innerHTML =
+        "<div class='title'>¡El gran día ha llegado!</div>";
+    }
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+});
+</script>
+</body></html>
