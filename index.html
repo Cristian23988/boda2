@@ -232,6 +232,7 @@
   justify-content: center;
   text-align: center;
   overflow: hidden;
+  margin-bottom: 120px; /* AJUSTA AQUÍ */
 }
 
 /* Fondo GIF bien adaptado */
@@ -447,8 +448,150 @@
 
   .story-section {
     min-height: 55vh;
+	margin-bottom: 120px; /* AJUSTA AQUÍ */
   }
 }
+.spacer {
+  height: 60px; /* ajusta el espacio */
+}
+/* ===============================
+   FIX STORY SECTION (SIN ROMPER)
+   =============================== */
+
+/* Espacio real entre secciones */
+.story-separator{
+  height: 120px;
+  background: var(--bg);
+}
+
+/* Story section NO se toca layout */
+.story-section{
+  margin-bottom: 0 !important; /* evita conflictos */
+}
+
+/* Cuadro historia – desktop (igual al tuyo) */
+.story-content{
+  background-color: rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+}
+
+/* ===============================
+   FIX MÓVIL (AQUÍ ESTABA EL PROBLEMA)
+   =============================== */
+@media (max-width: 768px){
+
+  /* Reduce tamaño del cuadro */
+  .story-content{
+    max-width: 90% !important;
+    padding: 16px !important;
+
+    /* 🔴 ESTO arregla la pérdida de transparencia */
+    background-color: rgba(0, 0, 0, 0.30) !important;
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+  }
+
+  /* Texto más contenido */
+  .story-content p{
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* La sección sigue respirando */
+  .story-section{
+    min-height: 55vh;
+  }
+
+  /* Separación menor en móvil */
+  .story-separator{
+    height: 80px;
+  }
+}
+
+/* ==================================
+   EXTENDER ALTURA DEL GIF / FONDO
+   ================================== */
+
+/* La sección debe permitir crecer */
+.story-section{
+  align-items: flex-start; /* 🔑 CLAVE */
+  padding-top: 80px;
+  padding-bottom: 0; /* lo controlan los separadores */
+}
+
+/* Divs que SOLO DAN ALTURA */
+.story-separator{
+  width: 100%;
+  height: 120px; /* controla cuánto se alarga */
+  pointer-events: none;
+}
+
+/* En móvil, un poco menos */
+@media (max-width: 768px){
+  .story-separator{
+    height: 80px;
+  }
+}
+/* ===============================
+   STORY SECTION – FLUJO NORMAL
+   =============================== */
+
+.story-section{
+  position: relative;
+  min-height: 70vh;
+  display: block;        /* 🔑 NO FLEX */
+  padding: 80px 16px;    /* controla respiración */
+}
+
+/* Fondo GIF se adapta al alto real */
+.story-section::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Contenido siempre encima */
+.story-content{
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+}
+
+/* Bloques extra debajo */
+.story-extra{
+  position: relative;
+  z-index: 2;
+  margin: 40px auto 0;
+  max-width: 360px;
+}
+
+/* Solo para crear espacio */
+.story-space{
+  height: 120px;
+}
+
+@media (max-width: 768px){
+  .story-section{
+    padding: 60px 14px;
+  }
+
+  .story-space{
+    height: 80px;
+  }
+}
+.section-separator{
+  height: 48px;            /* elegante, no exagerado */
+  width: 100%;
+}
+
+@media (max-width: 768px){
+  .section-separator{
+    height: 32px;
+  }
+}
+
 
   </style>
 </head>
@@ -501,10 +644,13 @@
     </div>
   </header>
 
+<div class="section-separator"></div>
+
 <!-- SECCIÓN HISTORIA / MENSAJE -->
 <section class="story-section">
+
   <div class="story-content" data-aos="fade-up">
-    <h2>Nuestra Historia</h2>
+   <h2>Nuestra Historia</h2>
     <p>
       El amor no se mide en tiempo, sino en momentos compartidos.
       Este día marca el inicio de una nueva etapa, 
@@ -535,9 +681,22 @@
     <div class="leg right"></div>
   </div>
 </div>
+  </div>
 
+  <!-- AQUÍ PUEDES AGREGAR LO QUE QUIERAS -->
+  <div class="story-extra" data-aos="fade-up">
+    <p style="color:white; font-size:14px;">
+      Y así, con fe y amor, comenzamos este nuevo capítulo...
+    </p>
+  </div>
 
-</section>
+  <!-- SOLO ESPACIO -->
+  <div class="story-space"></div>
+  <div class="story-space"></div>
+  <div class="story-space"></div>
+  <div class="story-space"></div>
+  <div class="story-space"></div>
+  <div class="story-space"></div>
 
 </section>
 
@@ -575,11 +734,40 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6" data-aos="fade-left">
-          <div class="card-glass overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1520974735194-6c0aa6c060d3?q=80&w=1840&auto=format&fit=crop" alt="Lugar del evento" class="w-100">
-          </div>
+       <div class="col-lg-6" data-aos="fade-left">
+  <div class="card-glass overflow-hidden p-2">
+    <div id="eventoCarousel" class="carousel slide" data-bs-ride="carousel">
+      
+      <!-- Imágenes -->
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://4stgroup.com/wp-content/uploads/2025/08/Fotos-Aereas-2-Entre-Pinos-Bodas-Eventos-4ST-Group-5.webp" class="d-block w-100" alt="Lugar del evento">
         </div>
+        <div class="carousel-item">
+          <img src="https://4stgroup.com/wp-content/uploads/2025/08/Fotos-Aereas-2-Entre-Pinos-Bodas-Eventos-4ST-Group-4.webp" class="d-block w-100" alt="Lugar del evento">
+        </div>
+        <div class="carousel-item">
+          <img src="https://4stgroup.com/wp-content/uploads/2025/08/Fotos-Aereas-2-Entre-Pinos-Bodas-Eventos-4ST-Group-3.webp" class="d-block w-100" alt="Lugar del evento">
+        </div>
+        <div class="carousel-item">
+          <img src="https://4stgroup.com/wp-content/uploads/2025/08/Fotos-Aereas-2-Entre-Pinos-Bodas-Eventos-4ST-Group-2.webp" class="d-block w-100" alt="Lugar del evento">
+        </div>
+      </div>
+
+      <!-- Flechas -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#eventoCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#eventoCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+
+    </div>
+  </div>
+</div>
+
       </div>
     </div>
   </section>
