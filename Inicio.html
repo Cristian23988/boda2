@@ -44,7 +44,7 @@
       overflow: hidden;
   background-image:
     linear-gradient(rgba(30,20,17,0.45), rgba(30,20,17,0.45)),
-    url('Inicio_files/fotos/fotoInicio.jpg');
+   
 
   background-position: center center;
   background-size: cover;
@@ -104,11 +104,20 @@
       font-family: 'Playfair Display', serif;
       font-weight: 700;
       font-size: clamp(28px, 5vw, 44px);
-      color: var(--accent-2);
+	  color: #FFD700; /* amarillo dorado */
+
+      margin-bottom: 18px;
+    }
+	.section-cuenta-regresiva {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(28px, 5vw, 44px);
+	  color: var(--accent-2);
+
       margin-bottom: 18px;
     }
     .lead-muted {
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.9); /* blanco suave */
       font-size: clamp(14px, 2.6vw, 18px);
     }
 
@@ -241,9 +250,6 @@
   position: absolute;
   inset: 0;
 
-  /* Imagen liviana primero (placeholder) */
-  background:
-    url('Inicio_files/fotos/fotoInicio.jpg') center center / cover no-repeat;
 
   transform: scale(1.05);
   content: "";
@@ -315,6 +321,7 @@
   display: flex;
   justify-content: center;
   gap: 15px;
+  
 }
 
 .stick {
@@ -327,6 +334,7 @@
 
 .stick.right {
   animation-delay: 1.5s;
+  
 }
 
 /* Cabeza */
@@ -337,9 +345,12 @@
   left: 50%;
   width: 22px;
   height: 22px;
-  border: 3px solid #000;
+  border: 3px solid #ffffff;
+
   border-radius: 50%;
   transform: translateX(-50%);
+  
+  
 }
 
 /* Cuerpo */
@@ -352,6 +363,7 @@
   height: 45px;
   background: #000;
   transform: translateX(-50%);
+  background: #ffffff;
 }
 
 /* Brazos */
@@ -361,16 +373,19 @@
   width: 28px;
   height: 3px;
   background: #000;
+  background: #ffffff;
 }
 
 .arm.left {
   left: -4px;
   transform: rotate(-25deg);
+  background: #ffffff;
 }
 
 .arm.right {
   right: -4px;
   transform: rotate(25deg);
+  background: #ffffff;
 }
 
 /* =====================
@@ -382,6 +397,7 @@
   width: 35px;
   height: 55px;
   margin: 15px auto;
+  
 }
 
 .cross::before {
@@ -401,6 +417,7 @@
   height: 100%;
   left: 50%;
   transform: translateX(-50%);
+  background: #ffffff;
 }
 
 /* barra horizontal */
@@ -410,6 +427,7 @@
   top: 28%;
   left: 50%;
   transform: translateX(-50%);
+  background: #ffffff;
 }
 
 
@@ -420,7 +438,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: 18px;
-  color: #b85c38;
+  color: #d90429;
   animation: heartbeat 1.5s infinite;
 }
 
@@ -437,7 +455,7 @@
 @media (max-width: 768px) {
   .story-content {
     max-width: 90%;
-    padding: 22px;
+    padding: 2px;
     background: rgba(255, 255, 255, 0.45); /* más transparente */
   }
 
@@ -480,6 +498,11 @@
    FIX MÓVIL (AQUÍ ESTABA EL PROBLEMA)
    =============================== */
 @media (max-width: 768px){
+
+.hero {
+    background-attachment: scroll; /* 🔑 evita zoom en móvil */
+    background-position: center top; /* opcional: asegura que se vea bien */
+  }
 
   /* Reduce tamaño del cuadro */
   .story-content{
@@ -592,6 +615,243 @@
   }
 }
 
+/* NUEVOS DISEÑOS*/
+.hero {
+  position: relative;
+  min-height: 100vh;
+  
+  background-attachment: fixed;
+  overflow: hidden;
+  
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.12), transparent 50%),
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.25),
+      rgba(0,0,0,.55)
+    );
+  z-index: 1;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 2;
+}
+.hero .container {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: #fff;
+}
+.names {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  letter-spacing: .08em;
+  text-shadow:
+    0 2px 12px rgba(0,0,0,.5),
+    0 25px 80px rgba(0,0,0,.75);
+}
+
+.subtitle,
+.date-badge {
+  text-shadow: 0 2px 10px rgba(0,0,0,.4);
+}
+.btn-accent {
+  background: linear-gradient(135deg, #c59d5f, #f1d08a);
+  color: #2b2b2b;
+  border-radius: 50px;
+  padding: 14px 34px;
+  font-weight: 600;
+  box-shadow:
+    0 10px 30px rgba(197,157,95,.45),
+    inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+.btn-accent::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.45),
+    transparent
+  );
+  opacity: .35;
+}
+.hero {
+  
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+@media (max-width: 768px){
+  .hero {
+    background-position: center top;
+  }
+}.names {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  letter-spacing: .08em;
+  text-shadow:
+    0 2px 12px rgba(0,0,0,.5),
+    0 25px 80px rgba(0,0,0,.75);
+}
+
+@media (max-width: 768px){
+  /* Solo afecta a la hero de inicio */
+  .hero-mobile-fix {
+    background-attachment: scroll !important; /* 🔑 quita el zoom extraño en móviles */
+    background-size: cover !important;
+    background-position: center top !important;
+  }
+}
+/* Hero fondo fijo para web y móvil */
+.hero {
+  position: relative;
+  min-height: 100vh;
+
+}
+
+.hero-bg {
+  position: fixed;         /* 🔑 Fijo en toda la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("Inicio_files/fotos/fotoInicio.jpg") center / cover no-repeat;
+  z-index: -1;             /* detrás de todo el contenido */
+}
+
+/* Capa de efecto (gradiente y sombras) */
+.hero::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.12), transparent 50%),
+    linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55));
+  z-index: 0; 
+  background: none !important;      /* Quita el patrón SVG */
+}
+.hero::before,
+.hero::after {
+  display: none !important;
+  content: none !important;
+}
+body {
+  background: none !important;
+}
+
+/* NUEVOOOOOOOOOOO SEPARADOR*/
+/* Separador elegante con fondo sutil */
+.separator-elegant {
+  position: relative;
+  width: 100%;
+  height: 60px; /* altura total del separador */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 0; /* espacio arriba y abajo */
+  pointer-events: none; /* no interfiere con clicks */
+
+  /* Fondo sutil para destacar sobre imágenes */
+  background: rgba(252, 248, 245, 0.6); /* color suave del theme, semitransparente */
+  backdrop-filter: blur(4px); /* efecto elegante de desenfoque */
+  border-radius: 12px; /* bordes redondeados */
+}
+
+/* Líneas a los lados */
+.separator-elegant::before,
+.separator-elegant::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #b85c38, transparent);
+}
+
+/* Decoración central */
+.separator-elegant .decor {
+  width: 40px;
+  height: 40px;
+  margin: 0 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #b85c38; /* color principal del theme */
+}
+.story-content .section-text {
+  color: #ffffff;
+}
+.section-text {
+  color: #ffffff;
+}
+.story-section .section-title {
+  color: #FFD700; /* amarillo dorado */
+}
+
+/*---------------CALENDARIO------------*/
+
+.calendar-elegant {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.cal-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: #000000; /* negro */
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  max-width: 280px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  
+  padding: 14px;
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+}
+
+.cal-grid span {
+  font-size: 13px;
+  color: #000000;
+  opacity: 0.85;
+}
+
+.cal-day {
+  padding: 6px 0;
+  border-radius: 8px;
+}
+
+.cal-day.special {
+  background: #d4af37; /* dorado elegante */
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
+}
+
+  .lead-muted-text {
+      color: #000;
+      font-size: clamp(14px, 2.6vw, 18px);
+    }
+
 
   </style>
 </head>
@@ -617,41 +877,46 @@
   </nav>
 
   <!-- HERO -->
-  <header id="home" class="hero">
-    <div class="container">
-      <div class="brand animate__animated animate__fadeIn">
-        <div class="names">Cristian & Elizabeth</div>
-        <div class="subtitle">Nos encantaría celebrar contigo nuestro gran día</div>
-        <div class="date-badge">26 de abril de 2026 • Medellín</div>
-        <div class="mt-4">
-            <!-- AUDIO PLAYER -->
-          <section id="musica" class="section">
-  <div class="container text-center">
-    <h2 class="section-title">Nuestra Canción</h2>
-    <p class="lead-muted mb-4">Haz clic para acompañar la invitación con nuestra melodía.</p>
+<header id="home" class="hero">
+  <!-- FONDO FIJO -->
+  <div class="hero-bg"></div>
 
-    <!-- Botón bonito -->
-    <button id="playBtn" class="btn btn-accent">
-      <i class="las la-music me-2"></i> Reproducir música
-    </button>
+  <div class="container">
+    <div class="brand animate__animated animate__fadeIn">
+      <div class="names">Cristian & Elizabeth</div>
+      <div class="subtitle">Nos encantaría celebrar contigo nuestro gran día</div>
+      <div class="mt-4">
+        <!-- AUDIO PLAYER -->
+        <section id="musica" class="section">
+          <div class="container text-center">
+            <h2 class="section-title">Nuestra Canción</h2>
+            <p class="lead-muted mb-4">Haz clic para acompañar la invitación con nuestra melodía.</p>
 
-    <!-- Elemento de audio oculto -->
-    <audio id="weddingAudio" src="Inicio_files/Instrumental_Mix.mp3"></audio>
-  </div>
-</section>
-        </div>
+            <button id="playBtn" class="btn btn-accent">
+              <i class="las la-music me-2"></i> Reproducir música
+            </button>
+
+            <audio id="weddingAudio" src="Inicio_files/Instrumental_Mix.mp3"></audio>
+            <p class="lead-muted mb-4">&nbsp;</p>
+          </div>
+        </section>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
-<div class="section-separator"></div>
+<!--SEPARADOR-->
+<div class="separator-elegant">
+  <div class="decor">♥</div>
+</div>
+
 
 <!-- SECCIÓN HISTORIA / MENSAJE -->
 <section class="story-section">
 
   <div class="story-content" data-aos="fade-up">
-   <h2>Nuestra Historia</h2>
-    <p>
+   <h2 class="section-title text-center">Nuestra Historia</h2>
+    <p class="section-text">
       El amor no se mide en tiempo, sino en momentos compartidos.
       Este día marca el inicio de una nueva etapa, 
 	  aquel que tanto soñamos y queremos compartirlo con ustedes. 
@@ -685,7 +950,7 @@
 
   <!-- AQUÍ PUEDES AGREGAR LO QUE QUIERAS -->
   <div class="story-extra" data-aos="fade-up">
-    <p style="color:white; font-size:14px;">
+    <p class="section-text">
       Y así, con fe y amor, comenzamos este nuevo capítulo...
     </p>
   </div>
@@ -701,13 +966,82 @@
 </section>
 
 
+<!--SEPARADOR-->
+<div class="separator-elegant">
+  <div class="decor">♥</div>
+</div>
+  <!-- CUENTA REGRESIVA -->
+  
+  <section id="cuenta" class="section">
+  
+    <div class="container">
+	
+      <div class="row justify-content-center">
+	  
+        <div class="col-lg-10">
+          <div class="card-glass p-4 p-md-5" data-aos="zoom-in">
+            <h2 class="section-cuenta-regresiva text-center">Cuenta regresiva</h2>
+            <p class="lead-muted-text text-center mb-4">Nos vemos muy pronto. ¡Estamos contando los días!</p>
+						<!-- CALENDARIO ELEGANTE -->
+<div class="calendar-elegant">
+  <div class="cal-header">26 de Abril 2026 • Medellín</div>
+  <div class="cal-grid">
+    <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
+
+    <span></span><span></span><span></span>
+    <span>1</span><span>2</span><span>3</span><span>4</span>
+    <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
+    <span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+    <span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span>
+
+    <!-- DÍA ESPECIAL -->
+    <span class="cal-day special">26</span>
+
+    <span>27</span><span>28</span><span>29</span><span>30</span>
+  </div>
+</div>
+            <div class="d-flex flex-wrap justify-content-center gap-3 countdown-box">
+              <div class="unit">
+                <div id="cd-days" class="num">--</div>
+                <div class="lbl">Días</div>
+              </div>
+              <div class="unit">
+                <div id="cd-hours" class="num">--</div>
+                <div class="lbl">Horas</div>
+              </div>
+              <div class="unit">
+                <div id="cd-minutes" class="num">--</div>
+                <div class="lbl">Minutos</div>
+              </div>
+              <div class="unit">
+                <div id="cd-seconds" class="num">--</div>
+                <div class="lbl">Segundos</div>
+              </div>
+            </div>
+
+
+            <div class="text-center mt-4">
+              <a href="#rsvp" class="btn btn-accent">Confirmar asistencia</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+<!--SEPARADOR-->
+<div class="separator-elegant">
+  <div class="decor">♥</div>
+</div>
+  
   <!-- EL EVENTO -->
   <section id="evento" class="section">
     <div class="container">
       <div class="row g-4 align-items-center">
         <div class="col-lg-6" data-aos="fade-right">
           <div class="card-glass p-4 p-md-5">
-            <h2 class="section-title">Detalles del evento</h2>
+            <h2 class="section-cuenta-regresiva">Detalles del evento</h2>
             <p class="lead-muted mb-4">
               Será un día inolvidable, rodeado de familia y amigos, con música, buena comida y mucho amor.
             </p>
@@ -772,40 +1106,10 @@
     </div>
   </section>
 
-  <!-- CUENTA REGRESIVA -->
-  <section id="cuenta" class="section">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-10">
-          <div class="card-glass p-4 p-md-5" data-aos="zoom-in">
-            <h2 class="section-title text-center">Cuenta regresiva</h2>
-            <p class="lead-muted text-center mb-4">Nos vemos muy pronto. ¡Estamos contando los días!</p>
-            <div class="d-flex flex-wrap justify-content-center gap-3 countdown-box">
-              <div class="unit">
-                <div id="cd-days" class="num">--</div>
-                <div class="lbl">Días</div>
-              </div>
-              <div class="unit">
-                <div id="cd-hours" class="num">--</div>
-                <div class="lbl">Horas</div>
-              </div>
-              <div class="unit">
-                <div id="cd-minutes" class="num">--</div>
-                <div class="lbl">Minutos</div>
-              </div>
-              <div class="unit">
-                <div id="cd-seconds" class="num">--</div>
-                <div class="lbl">Segundos</div>
-              </div>
-            </div>
-            <div class="text-center mt-4">
-              <a href="#rsvp" class="btn btn-accent">Confirmar asistencia</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!--SEPARADOR-->
+<div class="separator-elegant">
+  <div class="decor">♥</div>
+</div>
 
   <!-- GALERÍA -->
   <section id="galeria" class="section">
@@ -828,25 +1132,31 @@
     <img src="Inicio_files/fotos/foto7.JPG" alt="Foto 3">
   </a>
   <a href="Inicio_files/fotos/foto4.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto8.jpg" alt="Foto 3">
+    <img src="Inicio_files/fotos/foto8.jpg" alt="Foto 4">
   </a>
     <!-- Fotos locales -->
   <a href="Inicio_files/fotos/foto1.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto1.jpg" alt="Foto 1">
+    <img src="Inicio_files/fotos/foto1.jpg" alt="Foto 5">
   </a>
   <a href="Inicio_files/fotos/foto2.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto2.jpg" alt="Foto 2">
+    <img src="Inicio_files/fotos/foto2.jpg" alt="Foto 6">
   </a>
   <a href="Inicio_files/fotos/foto3.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto3.jpg" alt="Foto 3">
+    <img src="Inicio_files/fotos/foto3.jpg" alt="Foto 7">
   </a>
   <a href="Inicio_files/fotos/foto4.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto4.jpg" alt="Foto 3">
+    <img src="Inicio_files/fotos/foto4.jpg" alt="Foto 8">
   </a>
 </div>
 
     </div>
   </section>
+  
+<!--SEPARADOR-->
+<div class="separator-elegant">
+  <div class="decor">♥</div>
+</div>
+
 
   <!-- RSVP -->
   <section id="rsvp" class="section">
@@ -854,7 +1164,7 @@
       <div class="row g-4">
         <div class="col-lg-6" data-aos="fade-right">
           <div class="card-glass p-4 p-md-5 h-100">
-            <h2 class="section-title">Confirmación de asistencia</h2>
+            <h2 class="section-cuenta-regresiva">Confirmación de asistencia</h2>
             <p class="lead-muted">Por favor completa tus datos para reservar tu lugar.</p>
             <form id="rsvpForm" class="mt-3">
               <div class="mb-3">
@@ -888,7 +1198,7 @@
         </div>
         <div class="col-lg-6" data-aos="fade-left">
           <div class="card-glass p-4 p-md-5 h-100">
-            <h2 class="section-title">Ubicación</h2>
+            <h2 class="section-cuenta-regresiva">Ubicación</h2>
             <p class="lead-muted">Medellín, Antioquia — Salón Mirador</p>
             <div class="ratio ratio-16x9 rounded-3 overflow-hidden border">
               <iframe
