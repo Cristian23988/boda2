@@ -126,22 +126,11 @@ document.getElementById("seal").addEventListener("click", () => {
   const envelope = document.getElementById("envelope");
   envelope.classList.add("open");
 
-  // Espera a que la animación termine
   setTimeout(() => {
-    // Crear un preloader invisible para verificar que Inicio.html cargue
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = 'Inicio.html';
-    document.body.appendChild(iframe);
-
-    // Cuando el iframe cargue, redirige
-    iframe.onload = () => {
-      window.location.href = 'Inicio.html';
-    };
-  }, 1600); // duración de la animación
+    window.location.href = "Inicio.html";
+  }, 1600);
 });
 </script>
-
 
 </body>
 </html>
