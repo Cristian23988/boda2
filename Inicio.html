@@ -262,7 +262,7 @@
 /* GIF solo cuando entra en pantalla */
 .story-section.loaded::before {
   background:
-   
+    url('https://github.com/Cristian23988/boda2/releases/download/v1.1/foto_gif.1.gif')
     center center / cover no-repeat;
 }
 
@@ -854,6 +854,9 @@ body {
       font-size: clamp(14px, 2.6vw, 18px);
     }
 
+.fondo-inicio {
+ background: url("Inicio_files/fotos/fotoInicio.jpg") center / cover no-repeat;
+}
 
   </style>
 </head>
@@ -881,8 +884,9 @@ body {
   <!-- HERO -->
 <header id="home" class="hero">
   <!-- FONDO FIJO -->
-  <div class="hero-bg"></div>
+  <!--<div class="hero-bg"></div>-->
 
+<div class="fondo-inicio">
   <div class="container">
     <div class="brand animate__animated animate__fadeIn">
       <div class="names">Cristian & Elizabeth</div>
@@ -904,6 +908,7 @@ body {
         </section>
       </div>
     </div>
+  </div>
   </div>
 </header>
 
