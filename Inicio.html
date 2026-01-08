@@ -872,6 +872,9 @@ body {
       font-size: clamp(14px, 2.6vw, 18px);
     }
 
+.hidden {
+  display: none !important;
+}
 
   </style>
 </head>
@@ -1197,28 +1200,53 @@ body {
           <div class="card-glass p-4 p-md-5 h-100">
             <h2 class="section-cuenta-regresiva">Confirmación de asistencia</h2>
             <p class="lead-muted">Por favor completa tus datos para reservar tu lugar.</p>
-            <form id="rsvpForm">
+			
+			
+			
+			
+<form id="rsvpForm" style="max-width:400px; margin:auto; font-family: 'Arial', sans-serif;">
+  <label for="familyCode" style="font-weight:bold;">Código familiar</label>
+  <input type="text" id="familyCode" placeholder="Ej: FAM123" required style="width:100%; padding:8px; margin:5px 0 12px 0; font-size:16px; border-radius:5px; border:1px solid #ccc;">
 
-  <label>Código familiar</label>
-  <input type="text" id="familyCode" required>
-
-  <!-- BOTÓN 1: SOLO VALIDAR -->
-  <button type="button" id="validateBtn">
-    Guardar
-  </button>
+  <!-- BOTÓN 1: VALIDAR -->
+  <button type="button" id="validateBtn" style="
+    width:100%; 
+    padding:10px; 
+    background:#4f6f63; 
+    color:#fff; 
+    font-weight:bold; 
+    border:none; 
+    border-radius:6px; 
+    cursor:pointer;
+    transition: background .3s;
+  ">Validar Código</button>
 
   <!-- INVITADOS -->
-  <div id="familyMembers" style="display:none; margin-top:10px;"></div>
+  <div id="familyMembers" style="display:none; margin-top:15px; padding:10px; background:#f3f3f3; border-radius:6px;">
+    <!-- Checkboxes se llenan aquí -->
+  </div>
 
-  <!-- BOTÓN 2: CONFIRMAR (BLOQUEADO) -->
-  <button type="submit" id="confirmBtn" disabled>
-    Confirmar asistencia
-  </button>
-
+  <!-- BOTÓN 2: CONFIRMAR ASISTENCIA (invisible hasta validar) -->
+  <button type="button" id="confirmBtn" style="
+    display:none;
+    width:100%; 
+    margin-top:12px;
+    padding:10px; 
+    background:#1e73be; 
+    color:#fff; 
+    font-weight:bold; 
+    border:none; 
+    border-radius:6px; 
+    cursor:pointer;
+    transition: background .3s;
+  ">Confirmar Asistencia</button>
 </form>
 
-<pre id="result"></pre>
+<pre id="result" style="margin-top:15px; background:#eee; padding:10px; border-radius:6px; font-size:14px;"></pre>
 
+
+
+<pre id="result"></pre>
           </div>
         </div>
         <div class="col-lg-6" data-aos="fade-left">
@@ -1369,12 +1397,10 @@ const validateBtn = document.getElementById("validateBtn");
 const confirmBtn = document.getElementById("confirmBtn");
 const membersDiv = document.getElementById("familyMembers");
 const result = document.getElementById("result");
-const form = document.getElementById("rsvpForm");
 
 /* ===== VALIDAR CÓDIGO ===== */
 validateBtn.addEventListener("click", () => {
   const code = codeInput.value.trim().toUpperCase();
-
   if (!families[code]) {
     alert("Código incorrecto");
     return;
@@ -1385,38 +1411,67 @@ validateBtn.addEventListener("click", () => {
 
   membersDiv.innerHTML = "";
   families[code].forEach(name => {
-    membersDiv.innerHTML += `
-      <div>
-        <input type="checkbox" id="${name}">
-        <label for="${name}">${name}</label>
-      </div>
-    `;
+    const div = document.createElement("div");
+    div.style.marginBottom = "8px";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = `guest-${name}`;
+    checkbox.value = name;
+    checkbox.name = "guests";
+    checkbox.style.marginRight = "8px";
+
+    const label = document.createElement("label");
+    label.htmlFor = `guest-${name}`;
+    label.textContent = name;
+    label.style.cursor = "pointer";
+
+    div.appendChild(checkbox);
+    div.appendChild(label);
+    membersDiv.appendChild(div);
   });
 
   membersDiv.style.display = "block";
 
-  // BLOQUEAR CODIGO + HABILITAR CONFIRMACIÓN
+  // BLOQUEAR VALIDACIÓN
   codeInput.disabled = true;
   validateBtn.disabled = true;
-  confirmBtn.disabled = false;
+  validateBtn.style.background = "#999";
+
+  // HABILITAR CONFIRMACIÓN
+  confirmBtn.style.display = "block";
 });
 
 /* ===== CONFIRMAR ASISTENCIA ===== */
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
+confirmBtn.addEventListener("click", () => {
   if (!activeCode) return;
 
+  // Obtener invitados seleccionados
+  const selectedGuests = families[activeCode].filter(name => document.getElementById(`guest-${name}`).checked);
+
+  // Validar confirmación
+  const confirmMsg = selectedGuests.length > 0
+    ? `¿Estás seguro que quieres confirmar la asistencia de: ${selectedGuests.join(", ")}?`
+    : `No seleccionaste ningún invitado. ¿Deseas continuar y registrar que no asistirán?`;
+
+  if (!confirm(confirmMsg)) {
+    return; // cancelar si usuario da "No"
+  }
+
+  // Guardar datos
   const data = families[activeCode].map(name => ({
     codigo: activeCode,
     invitado: name,
-    asistira: document.getElementById(name).checked ? "Sí" : "No"
+    asistira: document.getElementById(`guest-${name}`).checked ? "Sí" : "No"
   }));
 
   result.textContent = JSON.stringify(data, null, 2);
   alert("Asistencia guardada ✅");
+
+  // BLOQUEAR CONFIRMACIÓN
+  confirmBtn.disabled = true;
+  confirmBtn.style.background = "#999";
 });
 </script>
-
 </body>
 </html>
