@@ -14,6 +14,7 @@
   --seal: #4f6f63;
   --shadow: rgba(0,0,0,.25);
 }
+
 * { box-sizing: border-box; }
 
 body {
@@ -26,45 +27,86 @@ body {
 }
 
 /* ESCENA */
-.scene { perspective: 1400px; }
+.scene {
+  perspective: 1400px;
+}
 
 /* SOBRE */
-.envelope { width: 360px; height: 240px; position: relative; transform-style: preserve-3d; }
+.envelope {
+  width: 360px;
+  height: 240px;
+  position: relative;
+  transform-style: preserve-3d;
+}
 
 /* CARTA */
-.letter { position: absolute; inset: 10px; background: var(--paper); border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.04); transform: translateY(60px); transition: transform 1.2s ease; z-index: 1; }
+.letter {
+  position: absolute;
+  inset: 10px;
+  background: var(--paper);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.04);
+  transform: translateY(60px);
+  transition: transform 1.2s ease;
+  z-index: 1;
+}
 
 /* CUERPO DEL SOBRE */
-.envelope-body { position: absolute; inset: 0; background: linear-gradient(135deg, var(--paper), var(--paper-dark)); border-radius: 6px; box-shadow: 0 40px 90px var(--shadow); z-index: 3; }
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--paper), var(--paper-dark));
+  border-radius: 6px;
+  box-shadow: 0 40px 90px var(--shadow);
+  z-index: 3;
+}
 
 /* SOLAPA */
-.flap { position: absolute; inset: 0; background: linear-gradient(135deg, #efe6da, #f9f6f1); clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%); transform-origin: top; transition: transform 1.2s ease; z-index: 4; }
+.flap {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #efe6da, #f9f6f1);
+  clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);
+  transform-origin: top;
+  transition: transform 1.2s ease;
+  z-index: 4;
+}
 
 /* SELLO */
-.seal { position: absolute; width: 68px; height: 68px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #6e9487, var(--seal)); display: grid; place-items: center; color: #eaf2ef; font-size: 26px; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,.35), inset 0 2px 4px rgba(255,255,255,.4); z-index: 5; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: transform .6s ease, opacity .6s ease; }
+.seal {
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #6e9487, var(--seal));
+  display: grid;
+  place-items: center;
+  color: #eaf2ef;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.35),
+    inset 0 2px 4px rgba(255,255,255,.4);
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform .6s ease, opacity .6s ease;
+}
 
 /* ESTADO ABIERTO */
-.envelope.open .flap { transform: rotateX(180deg); }
-.envelope.open .letter { transform: translateY(-140px); }
-.envelope.open .seal { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-
-/* BARRA DE CARGA */
-#loaderOverlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  flex-direction: column;
-  gap: 12px;
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  color: white;
-  display: none;
+.envelope.open .flap {
+  transform: rotateX(180deg);
 }
-#loaderBar { width: 300px; height: 18px; background: rgba(255,255,255,0.25); border-radius: 9px; overflow: hidden; }
-#loaderProgress { width: 0%; height: 100%; background: #b85c38; border-radius: 9px; transition: width 0.2s ease; }
+
+.envelope.open .letter {
+  transform: translateY(-140px);
+}
+
+.envelope.open .seal {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
 </style>
 </head>
 
@@ -79,59 +121,27 @@ body {
   </div>
 </div>
 
-<!-- BARRA DE CARGA -->
-<div id="loaderOverlay">
-  <div>Cargando invitación...</div>
-  <div id="loaderBar"><div id="loaderProgress"></div></div>
-</div>
-
 <script>
-const seal = document.getElementById("seal");
-const envelope = document.getElementById("envelope");
-const loaderOverlay = document.getElementById("loaderOverlay");
-const loaderProgress = document.getElementById("loaderProgress");
-
-// URL del GIF
-const gifUrl = 'https://github.com/Cristian23988/boda2/releases/download/v1.1/foto_gif.1.gif';
-
-seal.addEventListener("click", () => {
+document.getElementById("seal").addEventListener("click", () => {
+  const envelope = document.getElementById("envelope");
   envelope.classList.add("open");
-  loaderOverlay.style.display = "flex";
 
-  // Usar Fetch para medir progreso real
-  fetch(gifUrl)
-    .then(response => {
-      const reader = response.body.getReader();
-      const contentLength = +response.headers.get('Content-Length');
-      let received = 0;
+  // Espera a que la animación termine
+  setTimeout(() => {
+    // Crear un preloader invisible para verificar que Inicio.html cargue
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = 'Inicio.html';
+    document.body.appendChild(iframe);
 
-      return new ReadableStream({
-        start(controller) {
-          function push() {
-            reader.read().then(({done, value}) => {
-              if(done) {
-                loaderProgress.style.width = '100%';
-                setTimeout(() => window.location.href = 'Inicio.html', 300);
-                controller.close();
-                return;
-              }
-              received += value.length;
-              const percent = Math.floor((received / contentLength) * 100);
-              loaderProgress.style.width = percent + '%';
-              push();
-            });
-          }
-          push();
-        }
-      });
-    })
-    .catch(err => {
-      console.error("Error al cargar el GIF:", err);
-      // Redirigir igual si hay error
+    // Cuando el iframe cargue, redirige
+    iframe.onload = () => {
       window.location.href = 'Inicio.html';
-    });
+    };
+  }, 1600); // duración de la animación
 });
 </script>
+
 
 </body>
 </html>
