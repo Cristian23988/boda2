@@ -569,13 +569,14 @@
 
 /* VIDEO COMO BACKGROUND REAL */
 .story-bg-video{
-  position: absolute;
-  inset: 0;
+position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;     /* 🔑 como background-size: cover */
-  z-index: 0;
-  pointer-events: none;  /* no interfiere */
+  height: 100vh; /* toda la pantalla */
+  object-fit: cover; /* llena sin dejar espacios */
+  object-position: center;
+  z-index: -1;
 }
 @media (max-width: 768px) {
   .story-bg-video {
