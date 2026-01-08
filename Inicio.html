@@ -687,10 +687,12 @@
   );
   opacity: .35;
 }
-.hero {
-  
-  background-attachment: fixed;
-  overflow: hidden;
+@media (max-width: 768px){
+  .hero {
+    background-attachment: scroll !important; /* quita el zoom lento en móviles */
+    background-size: cover !important;
+    background-position: center top !important;
+  }
 }
 
 @media (max-width: 768px){
@@ -717,9 +719,7 @@
 .hero {
   position: relative;
   min-height: 100vh;
-  background: none !important;      /* Quita el patrón SVG */
-  position: relative;  
-  overflow: visible; /* evita scroll interno si hay pseudo-elementos */
+
 }
 
 .hero-bg {
@@ -854,9 +854,6 @@ body {
       font-size: clamp(14px, 2.6vw, 18px);
     }
 
-.fondo-inicio {
- background: url("Inicio_files/fotos/fotoInicio.jpg") center / cover no-repeat;
-}
 
   </style>
 </head>
@@ -884,9 +881,8 @@ body {
   <!-- HERO -->
 <header id="home" class="hero">
   <!-- FONDO FIJO -->
-  <!--<div class="hero-bg"></div>-->
+  <div class="hero-bg"></div>
 
-<div class="fondo-inicio">
   <div class="container">
     <div class="brand animate__animated animate__fadeIn">
       <div class="names">Cristian & Elizabeth</div>
@@ -908,7 +904,6 @@ body {
         </section>
       </div>
     </div>
-  </div>
   </div>
 </header>
 
