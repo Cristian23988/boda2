@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -108,10 +107,27 @@ body {
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
 }
+
+/* CARGADOR */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #f3eee7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+}
 </style>
 </head>
 
 <body>
+
+<!-- Loader -->
+<div id="loader">Cargando invitación...</div>
 
 <div class="scene">
   <div class="envelope" id="envelope">
@@ -123,12 +139,53 @@ body {
 </div>
 
 <script>
+// ---------- PRELOAD INICIO.HTML Y RECURSOS ----------
+let inicioHTML = null;
+
+// Cargar HTML y luego imágenes
+fetch('Inicio.html')
+  .then(resp => resp.text())
+  .then(html => {
+    inicioHTML = html;
+
+    // Crear un contenedor temporal para buscar imágenes
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    const imgs = tempDiv.querySelectorAll('img');
+
+    imgs.forEach(img => {
+      const image = new Image();
+      image.src = img.src;
+    });
+  });
+
+// ---------- CARGADOR ----------
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+
+  // Mantener el loader unos segundos si quieres
+  setTimeout(() => {
+    loader.style.opacity = 0;
+    setTimeout(() => loader.style.display = 'none', 500);
+  }, 1500); // puedes ajustar el tiempo del loader
+});
+
+// ---------- ANIMACION DEL SOBRE ----------
 document.getElementById("seal").addEventListener("click", () => {
   const envelope = document.getElementById("envelope");
   envelope.classList.add("open");
 
+  // Esperar animación y luego abrir Inicio.html precargado
   setTimeout(() => {
-    window.location.href = "Inicio.html";
+    if (inicioHTML) {
+      // Abrir HTML precargado
+      document.open();
+      document.write(inicioHTML);
+      document.close();
+    } else {
+      // fallback por si no carga
+      window.location.href = "Inicio.html";
+    }
   }, 1600);
 });
 </script>
