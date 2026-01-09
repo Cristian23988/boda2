@@ -1385,30 +1385,48 @@ const fileName = selectedVideo.split("/").pop();
 display.textContent = "Video en uso: " + fileName;
 </script>
 <script>
-const families = {
-  "FAM123": ["Cristian", "Elizabeth", "Ana"],
-  "FAM456": ["Juan", "Laura"]
-};
+/* ===============================
+   CONFIGURACIÓN: URL DE GOOGLE SHEETS
+   =============================== */
+let families = {}; // aquí se guardarán los datos de Sheets
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwFIJgyKSboQc4dHsyzWbG7Yedtgd-HL00jwBpmqVD_IACCwV3EjDuYIw7MDIzNk_qN/exec"; // <- TU URL DE SCRIPT
 
+/* ===============================
+   CARGAR DATOS DESDE GOOGLE SHEETS
+   =============================== */
+fetch(SHEETS_URL)
+  .then(res => res.json())
+  .then(data => {
+    families = data;
+    console.log("Datos de Google Sheets cargados:", families);
+  })
+  .catch(err => console.error("Error cargando datos:", err));
+
+/* ===============================
+   ELEMENTOS DEL FORMULARIO
+   =============================== */
 let activeCode = null;
-
 const codeInput = document.getElementById("familyCode");
 const validateBtn = document.getElementById("validateBtn");
 const confirmBtn = document.getElementById("confirmBtn");
 const membersDiv = document.getElementById("familyMembers");
 const result = document.getElementById("result");
 
-/* ===== VALIDAR CÓDIGO ===== */
+/* ===============================
+   BOTÓN VALIDAR CÓDIGO
+   =============================== */
 validateBtn.addEventListener("click", () => {
   const code = codeInput.value.trim().toUpperCase();
+
   if (!families[code]) {
-    alert("Código incorrecto");
+    alert("Código incorrecto ❌");
     return;
   }
 
   activeCode = code;
   alert("Código correcto ✅");
 
+  // Mostrar invitados
   membersDiv.innerHTML = "";
   families[code].forEach(name => {
     const div = document.createElement("div");
@@ -1442,36 +1460,53 @@ validateBtn.addEventListener("click", () => {
   confirmBtn.style.display = "block";
 });
 
-/* ===== CONFIRMAR ASISTENCIA ===== */
+/* ===============================
+   BOTÓN CONFIRMAR ASISTENCIA
+   =============================== */
 confirmBtn.addEventListener("click", () => {
   if (!activeCode) return;
 
   // Obtener invitados seleccionados
   const selectedGuests = families[activeCode].filter(name => document.getElementById(`guest-${name}`).checked);
 
-  // Validar confirmación
+  // Confirmación
   const confirmMsg = selectedGuests.length > 0
     ? `¿Estás seguro que quieres confirmar la asistencia de: ${selectedGuests.join(", ")}?`
     : `No seleccionaste ningún invitado. ¿Deseas continuar y registrar que no asistirán?`;
 
-  if (!confirm(confirmMsg)) {
-    return; // cancelar si usuario da "No"
-  }
+  if (!confirm(confirmMsg)) return;
 
-  // Guardar datos
-  const data = families[activeCode].map(name => ({
+  // Preparar datos para enviar a Apps Script
+  const dataToSend = families[activeCode].map(name => ({
     codigo: activeCode,
     invitado: name,
     asistira: document.getElementById(`guest-${name}`).checked ? "Sí" : "No"
   }));
 
-  result.textContent = JSON.stringify(data, null, 2);
-  alert("Asistencia guardada ✅");
+  // Mostrar en pantalla
+  result.textContent = JSON.stringify(dataToSend, null, 2);
+
+  // === ENVIAR DATOS A GOOGLE SHEETS ===
+  fetch(SHEETS_URL, {
+    method: "POST",
+    body: JSON.stringify(dataToSend)
+  })
+  .then(res => res.json())
+  .then(resp => {
+    console.log("Respuesta del servidor:", resp);
+    alert("Asistencia registrada ✅");
+  })
+  .catch(err => {
+    console.error("Error enviando asistencia:", err);
+    alert("Error al guardar asistencia ❌");
+  });
 
   // BLOQUEAR CONFIRMACIÓN
   confirmBtn.disabled = true;
   confirmBtn.style.background = "#999";
 });
 </script>
+
+
 </body>
 </html>
