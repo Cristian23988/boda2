@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitación Boda//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+
+BEGIN:VEVENT
+UID:boda-cristian-elizabeth@invitacion
+DTSTAMP:20260126T150000Z
+DTSTART:20260426T210000Z
+DTEND:20260427T020000Z
+SUMMARY:Boda Cristian & Elizabeth
+DESCRIPTION:Celebramos nuestra boda. ¡Te esperamos!
+LOCATION:Entre Pinos Event / Lugar del evento
+END:VEVENT
+
+END:VCALENDAR
