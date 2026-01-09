@@ -1424,7 +1424,7 @@ validateBtn.addEventListener("click", () => {
   }
 
   activeCode = code;
-  alert("Código correcto ✅");
+  //alert("Código correcto ✅");
 
   // Mostrar invitados
   membersDiv.innerHTML = "";
@@ -1463,11 +1463,13 @@ validateBtn.addEventListener("click", () => {
 /* ===============================
    BOTÓN CONFIRMAR ASISTENCIA
    =============================== */
-confirmBtn.addEventListener("click", () => {
+confirmBtn.addEventListener("click", async () => {
   if (!activeCode) return;
 
   // Obtener invitados seleccionados
-  const selectedGuests = families[activeCode].filter(name => document.getElementById(`guest-${name}`).checked);
+  const selectedGuests = families[activeCode].filter(
+    name => document.getElementById(`guest-${name}`).checked
+  );
 
   // Confirmación
   const confirmMsg = selectedGuests.length > 0
@@ -1483,28 +1485,69 @@ confirmBtn.addEventListener("click", () => {
     asistira: document.getElementById(`guest-${name}`).checked ? "Sí" : "No"
   }));
 
-  // Mostrar en pantalla
-  result.textContent = JSON.stringify(dataToSend, null, 2);
+  // Mostrar mensaje de espera
+  result.innerHTML = `<div style="
+    padding: 12px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    animation: pulse 1.2s infinite;
+  ">Guardando tu asistencia...</div>`;
 
-  // === ENVIAR DATOS A GOOGLE SHEETS ===
-  fetch(SHEETS_URL, {
-    method: "POST",
-    body: JSON.stringify(dataToSend)
-  })
-  .then(res => res.json())
-  .then(resp => {
-    console.log("Respuesta del servidor:", resp);
-    alert("Asistencia registrada ✅");
-  })
-  .catch(err => {
+  // Estilo animación pulse
+  if (!document.getElementById('pulseStyle')) {
+    const style = document.createElement('style');
+    style.id = 'pulseStyle';
+    style.innerHTML = `
+      @keyframes pulse {
+        0% { opacity: 0.7; }
+        50% { opacity: 1; }
+        100% { opacity: 0.7; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  try {
+    const resp = await fetch(SHEETS_URL, {
+      method: "POST",
+      body: JSON.stringify(dataToSend)
+    });
+    const jsonResp = await resp.json();
+    console.log("Respuesta del servidor:", jsonResp);
+
+    // Mensaje de éxito
+    result.innerHTML = `<div style="
+      padding: 12px;
+      background: linear-gradient(135deg, #f1d08a, #c59d5f);
+      color: #2b2b2b;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    ">¡Tu asistencia ha sido confirmada con éxito! 🎉</div>`;
+
+    // Bloquear inputs y checkboxes
+    confirmBtn.disabled = true;
+    confirmBtn.style.background = "#999";
+    codeInput.disabled = true;
+    membersDiv.querySelectorAll('input').forEach(cb => cb.disabled = true);
+
+  } catch (err) {
     console.error("Error enviando asistencia:", err);
-    alert("Error al guardar asistencia ❌");
-  });
-
-  // BLOQUEAR CONFIRMACIÓN
-  confirmBtn.disabled = true;
-  confirmBtn.style.background = "#999";
+    result.innerHTML = `<div style="
+      padding: 12px;
+      background: rgba(255,0,0,0.1);
+      color: #b00000;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    ">Error al guardar asistencia ❌</div>`;
+  }
 });
+
 </script>
 
 
