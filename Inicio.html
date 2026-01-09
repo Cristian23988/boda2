@@ -890,11 +890,108 @@ body {
   background: #999;
   cursor: not-allowed;
 }
+/* ===============================
+   SOMBRA DEGRADÉ EN BORDES LATERALES
+   =============================== */
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  width: 48px;              /* grosor del degradé */
+  height: 100vh;
+  pointer-events: none;     /* no bloquea clics */
+  z-index: 9999;            /* encima de todo */
+}
+
+/* Lado izquierdo */
+body::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.25),
+    rgba(0,0,0,0.08),
+    transparent
+  );
+}
+
+/* Lado derecho */
+body::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(0,0,0,0.25),
+    rgba(0,0,0,0.08),
+    transparent
+  );
+}
+
+/* Ajuste fino para móviles */
+@media (max-width: 768px) {
+  body::before,
+  body::after {
+    width: 28px;
+    opacity: 0.6; /* más sutil en móvil */
+  }
+}
+/* ===============================
+   SOMBRA DEGRADÉ LATERAL GLOBAL
+   =============================== */
+
+.edge-shadow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999; /* encima de TODO */
+}
+
+/* Lado izquierdo */
+.edge-shadow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 55px;
+  height: 100vh;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.60),
+    rgba(0,0,0,0.12),
+    transparent
+  );
+}
+
+/* Lado derecho */
+.edge-shadow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55px;
+  height: 100vh;
+  background: linear-gradient(
+    to left,
+    rgba(0,0,0,0.60),
+    rgba(0,0,0,0.12),
+    transparent
+  );
+}
+
+/* Móvil: más sutil */
+@media (max-width: 768px) {
+  .edge-shadow::before,
+  .edge-shadow::after {
+    width: 28px;
+    opacity: 0.6;
+  }
+}
+
 
   </style>
 </head>
 <body>
-
+<div class="edge-shadow"></div>
   <!-- NAV -->
   <nav class="navbar navbar-expand-lg nav-blur">
     <div class="container">
@@ -968,7 +1065,7 @@ body {
        style="width:100%; height:100%; object-fit:cover;">
 </video>
   <div class="story-content" data-aos="fade-up">
-   <h2 class="section-title text-center">Nuestra Historia</h2>
+   <h2 class="section-title text-center">Un Momento Especial</h2>
     <p class="section-text">
       El amor no se mide en tiempo, sino en momentos compartidos.
       Este día marca el inicio de una nueva etapa, 
@@ -1018,7 +1115,51 @@ body {
   <div class="decor">♥</div>
 </div>
 
+  <!-- GALERÍA -->
+  <section id="galeria" class="section">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2 class="section-title">Un poco de nuestra historia</h2>
+        <p class="lead-muted">Momentos que nos trajeron hasta aquí.</p>
+      </div>
+      <div class="gallery-grid" id="lightgallery">
 
+
+    <!-- Fotos locales -->
+  <a href="Inicio_files/fotos/foto1.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto5.jpeg" alt="Foto 1">
+  </a>
+  <a href="Inicio_files/fotos/foto2.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto6.jpeg" alt="Foto 2">
+  </a>
+  <a href="Inicio_files/fotos/foto3.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto7.jpg" alt="Foto 3">
+  </a>
+  <a href="Inicio_files/fotos/foto4.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto8.jpg" alt="Foto 4">
+  </a>
+    <!-- Fotos locales -->
+  <a href="Inicio_files/fotos/foto1.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto1.jpg" alt="Foto 5">
+  </a>
+  <a href="Inicio_files/fotos/foto2.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto2.jpg" alt="Foto 6">
+  </a>
+  <a href="Inicio_files/fotos/foto3.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto3.jpg" alt="Foto 7">
+  </a>
+  <a href="Inicio_files/fotos/foto4.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto4.jpg" alt="Foto 8">
+  </a>
+</div>
+
+    </div>
+  </section>
+  
+<!--SEPARADOR-->
+<div class="separator-elegant">
+  <div class="decor">♥</div>
+</div>
   <!-- CUENTA REGRESIVA -->
   
   <section id="cuenta" class="section">
@@ -1082,51 +1223,7 @@ body {
   <div class="decor">♥</div>
 </div>
 
-  <!-- GALERÍA -->
-  <section id="galeria" class="section">
-    <div class="container">
-      <div class="text-center mb-4">
-        <h2 class="section-title">Un poco de nuestra historia</h2>
-        <p class="lead-muted">Momentos que nos trajeron hasta aquí.</p>
-      </div>
-      <div class="gallery-grid" id="lightgallery">
 
-
-    <!-- Fotos locales -->
-  <a href="Inicio_files/fotos/foto1.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto5.jpeg" alt="Foto 1">
-  </a>
-  <a href="Inicio_files/fotos/foto2.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto6.jpeg" alt="Foto 2">
-  </a>
-  <a href="Inicio_files/fotos/foto3.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto7.jpg" alt="Foto 3">
-  </a>
-  <a href="Inicio_files/fotos/foto4.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto8.jpg" alt="Foto 4">
-  </a>
-    <!-- Fotos locales -->
-  <a href="Inicio_files/fotos/foto1.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto1.jpg" alt="Foto 5">
-  </a>
-  <a href="Inicio_files/fotos/foto2.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto2.jpg" alt="Foto 6">
-  </a>
-  <a href="Inicio_files/fotos/foto3.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto3.jpg" alt="Foto 7">
-  </a>
-  <a href="Inicio_files/fotos/foto4.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto4.jpg" alt="Foto 8">
-  </a>
-</div>
-
-    </div>
-  </section>
-  
-<!--SEPARADOR-->
-<div class="separator-elegant">
-  <div class="decor">♥</div>
-</div>
   
 
   
