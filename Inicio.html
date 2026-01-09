@@ -876,6 +876,21 @@ body {
   display: none !important;
 }
 
+#validateBtn {
+  background: #1a73e8;   /* azul suave tipo Google */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#validateBtn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
   </style>
 </head>
 <body>
@@ -1209,17 +1224,7 @@ body {
   <input type="text" id="familyCode" placeholder="Ej: FAM123" required style="width:100%; padding:8px; margin:5px 0 12px 0; font-size:16px; border-radius:5px; border:1px solid #ccc;">
 
   <!-- BOTÓN 1: VALIDAR -->
-  <button type="button" id="validateBtn" style="
-    width:100%; 
-    padding:10px; 
-    background:#4f6f63; 
-    color:#fff; 
-    font-weight:bold; 
-    border:none; 
-    border-radius:6px; 
-    cursor:pointer;
-    transition: background .3s;
-  ">Validar Código</button>
+<button type="button" id="validateBtn">Validar Código</button>
 
   <!-- INVITADOS -->
   <div id="familyMembers" style="display:none; margin-top:15px; padding:10px; background:#f3f3f3; border-radius:6px;">
@@ -1385,22 +1390,14 @@ const fileName = selectedVideo.split("/").pop();
 display.textContent = "Video en uso: " + fileName;
 </script>
 <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
 /* ===============================
    CONFIGURACIÓN: URL DE GOOGLE SHEETS
    =============================== */
 let families = {}; // aquí se guardarán los datos de Sheets
 const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwFIJgyKSboQc4dHsyzWbG7Yedtgd-HL00jwBpmqVD_IACCwV3EjDuYIw7MDIzNk_qN/exec"; // <- TU URL DE SCRIPT
-
-/* ===============================
-   CARGAR DATOS DESDE GOOGLE SHEETS
-   =============================== */
-fetch(SHEETS_URL)
-  .then(res => res.json())
-  .then(data => {
-    families = data;
-    console.log("Datos de Google Sheets cargados:", families);
-  })
-  .catch(err => console.error("Error cargando datos:", err));
 
 /* ===============================
    ELEMENTOS DEL FORMULARIO
@@ -1411,6 +1408,37 @@ const validateBtn = document.getElementById("validateBtn");
 const confirmBtn = document.getElementById("confirmBtn");
 const membersDiv = document.getElementById("familyMembers");
 const result = document.getElementById("result");
+// 🔒 Bloquear botón hasta que carguen los datos
+validateBtn.disabled = true;
+
+/* ===============================
+   CARGAR DATOS DESDE GOOGLE SHEETS
+   =============================== */
+// Mensaje mientras carga Sheets
+result.innerHTML = "Cargando invitación...";
+
+fetch(SHEETS_URL)
+  .then(res => {
+    console.log("Estado HTTP:", res.status);
+    return res.json();
+  })
+  .then(data => {
+    families = data;
+    console.log("Datos de Google Sheets cargados:", families);
+
+    // ✅ Habilitar botón SOLO cuando ya hay datos
+    validateBtn.disabled = false;
+
+ 
+
+    result.innerHTML = "";
+  })
+  .catch(err => {
+    console.error("Error cargando datos:", err);
+    result.innerHTML = "❌ Error cargando datos. Recarga la página.";
+  });
+
+
 
 /* ===============================
    BOTÓN VALIDAR CÓDIGO
@@ -1549,7 +1577,9 @@ confirmBtn.addEventListener("click", async () => {
 });
 
 
+});
 </script>
+
 
 
 </body>
