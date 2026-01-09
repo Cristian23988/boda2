@@ -987,6 +987,37 @@ body::after {
   }
 }
 
+/* ===============================
+   SECCIÓN GALERÍA EN SEPIA / B&N
+   =============================== */
+
+#galeria {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Capa que aplica el efecto */
+#galeria::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  /* efecto sepia + blanco y negro */
+  backdrop-filter: grayscale(100%) sepia(60%) contrast(1.05);
+  -webkit-backdrop-filter: grayscale(100%) sepia(60%) contrast(1.05);
+
+  /* leve fondo para reforzar el efecto */
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Eleva el contenido para que no se afecte */
+#galeria > .container {
+  position: relative;
+  z-index: 1;
+}
+
+
 
   </style>
 </head>
@@ -1110,6 +1141,7 @@ body::after {
   
 
 </section>
+
 <!--SEPARADOR-->
 <div class="separator-elegant">
   <div class="decor">♥</div>
