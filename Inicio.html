@@ -1016,6 +1016,164 @@ body::after {
   position: relative;
   z-index: 1;
 }
+/* Tamaño uniforme del carrusel */
+.carousel-item {
+  height: 360px; /* tamaño moderado, elegante */
+ 
+}
+
+/* Imágenes adaptadas sin deformarse */
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* clave */
+  object-position: center top; /* centra el recorte */
+  border-radius: 12px; /* opcional, se ve más fino */
+}
+
+@media (max-width: 576px) {
+  .carousel-item {
+    height: 200px;
+  }
+}
+
+.dresscode-section {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+   color: #94533A;
+
+}
+
+.dresscode-text {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 28px;
+}
+
+.color-palette {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.color-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+/* Colores */
+.beige { background: #E8DCCB; }
+.champagne { background: #F2E6D8; }
+.nude { background: #E3CFC3; }
+.olive { background: #8A8F6A; }
+
+.palette-note {
+  font-size: 14px;
+  opacity: 0.8;
+  max-width: 320px;
+  margin: 14px auto 0;
+}
+@media (max-width: 576px) {
+  .dresscode-text {
+    font-size: 20px;
+  }
+  .color-circle {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.dresscode-section {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.section-title {
+  color: #94533A;
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.dresscode-text {
+  font-size: 22px;
+  margin-bottom: 30px;
+}
+
+.palette-group {
+  margin-bottom: 28px;
+}
+
+.palette-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.color-palette {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.color-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+/* Hombres */
+.beige { background: #E8DCCB; }
+.cream { background: #F5F1E6; }
+.champagne { background: #F2E6D8; }
+.black { background: #1C1C1C; }
+.gray { background: #9B9B9B; }
+
+/* Mujeres */
+.rose { background: #D8A7B1; }      /* rosa palo */
+.lavender { background: #C6B7E2; }
+.brown { background: #7A5C45; }     /* café */
+
+.palette-note {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-top: 10px;
+}
+
+.palette-note.small {
+  font-size: 13px;
+}
+
+#SeeMan, #SeeWoman {
+  pointer-events: auto;          /* Asegura que respondan a su propio click */
+  margin: 0 6px;                 /* Separación mínima para que no se choquen */
+  position: relative;             /* Evita interferencias de otros elementos */
+  z-index: 2;                     /* Siempre encima de cualquier sombra cercana */
+}
+
+#SeeMan:hover, #SeeWoman:hover,
+#SeeMan:focus, #SeeWoman:focus {
+  transform: none;                /* Quita desplazamientos de hover si existían */
+  box-shadow: none;               /* Quita sombras que pueden crear zonas de “proximidad” */
+}
+@media (max-width: 768px){
+  #SeeMan, #SeeWoman {
+    display: inline-block;       /* Evita flex o grid que haga “choque” */
+    width: 48%;                  /* Que no se toquen horizontalmente */
+    margin: 0 1%;                /* pequeño margen */
+  }
+}
 
 
 
@@ -1136,58 +1294,20 @@ body::after {
     </p>
   </div>
   
+  <div class="story-content" data-aos="fade-up">
+    <p class="section-text">
+      “Y si alguno prevaleciere contra uno, dos le resistirán; y cordón de tres dobleces no se rompe pronto.”
+Eclesiastés 4:12
+
+    </p>
+</div>
+  </div>
   <p class="lead-muted mb-4">&nbsp;</p>
   <p class="lead-muted mb-4">&nbsp;</p>
   
 
 </section>
 
-<!--SEPARADOR-->
-<div class="separator-elegant">
-  <div class="decor">♥</div>
-</div>
-
-  <!-- GALERÍA -->
-  <section id="galeria" class="section">
-    <div class="container">
-      <div class="text-center mb-4">
-        <h2 class="section-title">Un poco de nuestra historia</h2>
-        <p class="lead-muted">Momentos que nos trajeron hasta aquí.</p>
-      </div>
-      <div class="gallery-grid" id="lightgallery">
-
-
-    <!-- Fotos locales -->
-  <a href="Inicio_files/fotos/foto5.jpeg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto5.jpeg" alt="Foto 1">
-  </a>
-  <a href="Inicio_files/fotos/foto6.jpeg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto6.jpeg" alt="Foto 2">
-  </a>
-  <a href="Inicio_files/fotos/foto7.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto7.jpg" alt="Foto 3">
-  </a>
-  <a href="Inicio_files/fotos/foto8.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto8.jpg" alt="Foto 4">
-  </a>
-    <!-- Fotos locales -->
-  <a href="Inicio_files/fotos/foto1.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto1.jpg" alt="Foto 5">
-  </a>
-  <a href="Inicio_files/fotos/foto2.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto2.jpg" alt="Foto 6">
-  </a>
-  <a href="Inicio_files/fotos/foto3.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto3.jpg" alt="Foto 7">
-  </a>
-  <a href="Inicio_files/fotos/foto4.jpg" data-fancybox="gal">
-    <img src="Inicio_files/fotos/foto4.jpg" alt="Foto 8">
-  </a>
-</div>
-
-    </div>
-  </section>
-  
 <!--SEPARADOR-->
 <div class="separator-elegant">
   <div class="decor">♥</div>
@@ -1258,76 +1378,170 @@ body::after {
 </div>
 
 
+  <!-- GALERÍA -->
+  <section id="galeria" class="section">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2 class="section-title">Un poco de nuestra historia</h2>
+        <p class="lead-muted">Momentos que nos trajeron hasta aquí.</p>
+      </div>
+      <div class="gallery-grid" id="lightgallery">
+
+
+    <!-- Fotos locales -->
+  <a href="Inicio_files/fotos/foto5.jpeg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto5.jpeg" alt="Foto 1">
+  </a>
+  <a href="Inicio_files/fotos/foto6.jpeg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto6.jpeg" alt="Foto 2">
+  </a>
+  <a href="Inicio_files/fotos/foto7.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto7.jpg" alt="Foto 3">
+  </a>
+  <a href="Inicio_files/fotos/foto8.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto8.jpg" alt="Foto 4">
+  </a>
+    <!-- Fotos locales -->
+  <a href="Inicio_files/fotos/foto1.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto1.jpg" alt="Foto 5">
+  </a>
+  <a href="Inicio_files/fotos/foto2.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto2.jpg" alt="Foto 6">
+  </a>
+  <a href="Inicio_files/fotos/foto3.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto3.jpg" alt="Foto 7">
+  </a>
+  <a href="Inicio_files/fotos/foto4.jpg" data-fancybox="gal">
+    <img src="Inicio_files/fotos/foto4.jpg" alt="Foto 8">
+  </a>
+</div>
+
+    </div>
+  </section>
   
+<!--SEPARADOR-->
+<div class="separator-elegant">
+  <div class="decor">♥</div>
+</div>
+
 
   
-  <!-- EL EVENTO -->
+  <!-- DETALLES DEL EVENTO -->
   <section id="evento" class="section">
     <div class="container">
       <div class="row g-4 align-items-center">
         <div class="col-lg-6" data-aos="fade-right">
           <div class="card-glass p-4 p-md-5">
             <h2 class="section-cuenta-regresiva">Detalles del evento</h2>
-            <p class="lead-muted mb-4">
+            <p class="text-muted mb-2">
               Será un día inolvidable, rodeado de familia y amigos, con música, buena comida y mucho amor.
             </p>
-            <div class="timeline">
-              <div class="item">
-                <h6 class="mb-1"><i class="las la-church me-2 text-danger"></i>Ceremonia</h6>
-                <p class="text-muted mb-2">3:00 p.m. • Ceremonia</p>
-              </div>
-			  <div class="item">
-                <h6 class="mb-1"><i class="las la-church me-2 text-danger"></i>Ceremonia</h6>
-                <p class="text-muted mb-2">4:00 p.m. • Parroquia San José</p>
-              </div>
-              <div class="item">
-                <h6 class="mb-1"><i class="las la-glass-cheers me-2 text-danger"></i>Recepción</h6>
-                <p class="text-muted mb-2">6:00 p.m. • Salón Mirador, Medellín</p>
-              </div>
-              <div class="item">
-                <h6 class="mb-1"><i class="las la-music me-2 text-danger"></i>Fiesta</h6>
-                <p class="text-muted mb-2">8:00 p.m. • DJ en vivo y pista abierta</p>
-              </div>
-            </div>
-            <div class="mt-3">
-              <span class="accent-pill"><i class="las la-map-marker-alt me-1"></i> Dress code: Elegante</span>
-            </div>
-          </div>
-        </div>
-       <div class="col-lg-6" data-aos="fade-left">
-  <div class="card-glass overflow-hidden p-2">
-    <div id="eventoCarousel" class="carousel slide" data-bs-ride="carousel">
-      
-      <!-- Imágenes -->
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="https://4stgroup.com/wp-content/uploads/2025/08/Fotos-Aereas-2-Entre-Pinos-Bodas-Eventos-4ST-Group-5.webp" class="d-block w-100" alt="Lugar del evento">
-        </div>
-        <div class="carousel-item">
-          <img src="https://4stgroup.com/wp-content/uploads/2025/08/Fotos-Aereas-2-Entre-Pinos-Bodas-Eventos-4ST-Group-4.webp" class="d-block w-100" alt="Lugar del evento">
-        </div>
-        <div class="carousel-item">
-          <img src="https://4stgroup.com/wp-content/uploads/2025/08/Fotos-Aereas-2-Entre-Pinos-Bodas-Eventos-4ST-Group-3.webp" class="d-block w-100" alt="Lugar del evento">
-        </div>
-        <div class="carousel-item">
-          <img src="https://4stgroup.com/wp-content/uploads/2025/08/Fotos-Aereas-2-Entre-Pinos-Bodas-Eventos-4ST-Group-2.webp" class="d-block w-100" alt="Lugar del evento">
-        </div>
-      </div>
+            
+<div class="timeline">
 
-      <!-- Flechas -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#eventoCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#eventoCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Siguiente</span>
-      </button>
-
-    </div>
+  <div class="item">
+    <h6 class="mb-1"><i class="las la-user-friends me-2 text-danger"></i>Llegada de invitados</h6>
+    <p class="text-muted mb-2">2:30 p.m.</p>
   </div>
+
+  <div class="item">
+    <h6 class="mb-1"><i class="las la-church me-2 text-danger"></i>Ceremonia</h6>
+    <p class="text-muted mb-2">3:00 p.m.</p>
+  </div>
+
+  <div class="item">
+    <h6 class="mb-1"><i class="las la-camera me-2 text-danger"></i>Sesión de fotos</h6>
+    <p class="text-muted mb-2">4:00 p.m.</p>
+  </div>
+
+  <div class="item">
+    <h6 class="mb-1"><i class="las la-glass-cheers me-2 text-danger"></i>Recepción</h6>
+    <p class="text-muted mb-2">5:00 p.m.</p>
+  </div>
+
+  <div class="item">
+    <h6 class="mb-1"><i class="las la-wine-glass-alt me-2 text-danger"></i>Brindis</h6>
+    <p class="text-muted mb-2">5:30 p.m.</p>
+  </div>
+
+  <div class="item">
+    <h6 class="mb-1"><i class="las la-utensils me-2 text-danger"></i>Cena</h6>
+    <p class="text-muted mb-2">6:30 p.m.</p>
+  </div>
+
+<div class="item">
+  <h6 class="mb-1">
+    <i class="las la-users me-1 text-danger"></i>
+    <i class="las la-music me-2 text-danger"></i>
+    Baile de novios
+  </h6>
+  <p class="text-muted mb-2">7:30 p.m.</p>
 </div>
 
+  <div class="item">
+    <h6 class="mb-1"><i class="las la-music me-2 text-danger"></i>Despedida</h6>
+    <p class="text-muted mb-2">8:30 p.m.</p>
+  </div>
+
+</div>
+
+          </div>
+        </div>
+
+       <div class="col-lg-6" data-aos="fade-right">
+          <div class="card-glass p-4 p-md-5">
+            <h2 class="section-cuenta-regresiva">Drees Code</h2>
+            <p class="text-muted mb-2">
+              Tu presencia es lo más importante; agradecemos acompañarnos con un atuendo acorde a la ocasión.
+            </p>
+			<div class="dresscode-section">
+  <h3 class="section-title">Código de Vestimenta</h3>
+  <p class="dresscode-text">Formal</p>
+
+  <h3 class="section-title">Paleta de Colores</h3>
+  <div class="color-palette">
+  <!-- HOMBRES -->
+  <div class="palette-group">
+    <p class="palette-title">Hombres</p>
+    <div class="color-palette">
+      <span class="color-circle beige"></span>
+      <span class="color-circle brown"></span>
+      <span class="color-circle black"></span>
+      <span class="color-circle gray"></span>
+    </div>
+		  <button id="SeeMan" class="btn btn-accent"> Ejemplo hombre</button>
+
+		  
+    <p class="palette-note small">
+      Evitar tonos verdes, vino o sus derivaciones.
+    </p>
+  </div>
+
+  <!-- MUJERES -->
+  <div class="palette-group">
+    <p class="palette-title">Mujeres</p>
+    <div class="color-palette">
+      <span class="color-circle rose"></span>
+      <span class="color-circle lavender"></span>
+      <span class="color-circle gray"></span>
+      <span class="color-circle brown"></span>
+    </div>
+			  <button id="SeeWoman" class="btn btn-accent"> Ejemplo mujer</button>
+			  
+    <p class="palette-note small">
+      Evitar blanco, rojo y tonos terracota.
+    </p>
+	
+  </div>
+  </div>
+
+  <p class="palette-note">
+    Agradecemos elegir tonos suaves y armoniosos para acompañarnos en este día tan especial.
+  </p>
+</div>
+
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1347,14 +1561,14 @@ body::after {
         <div class="col-lg-6" data-aos="fade-right">
           <div class="card-glass p-4 p-md-5 h-100">
             <h2 class="section-cuenta-regresiva">Confirmación de asistencia</h2>
-            <p class="lead-muted">Por favor completa tus datos para reservar tu lugar.</p>
+            <p class="text-muted mb-2">Por favor completa tus datos para reservar tu lugar.</p>
 			
 			
 			
 			
 <form id="rsvpForm" style="max-width:400px; margin:auto; font-family: 'Arial', sans-serif;">
   <label for="familyCode" style="font-weight:bold;">Código familiar</label>
-  <input type="text" id="familyCode" placeholder="Ej: FAM123" required style="width:100%; padding:8px; margin:5px 0 12px 0; font-size:16px; border-radius:5px; border:1px solid #ccc;">
+  <input type="text" id="familyCode" placeholder="Ej: FA1235" required style="width:100%; padding:8px; margin:5px 0 12px 0; font-size:16px; border-radius:5px; border:1px solid #ccc;">
 
   <!-- BOTÓN 1: VALIDAR -->
 <button type="button" id="validateBtn">Validar Código</button>
@@ -1387,31 +1601,77 @@ body::after {
 <pre id="result"></pre>
           </div>
         </div>
+
+      </div>
+    </div>
+  </section>
+  <!--SEPARADOR-->
+<div class="separator-elegant">
+  <div class="decor">♥</div>
+</div>
+
+
+  <!-- UBICACIÓN -->
+  <section id="rsvp" class="section">
+    <div class="container">
+      <div class="row g-4">
+		
         <div class="col-lg-6" data-aos="fade-left">
           <div class="card-glass p-4 p-md-5 h-100">
             <h2 class="section-cuenta-regresiva">Ubicación</h2>
-            <p class="lead-muted">Medellín, Antioquia — Salón Mirador</p>
-            <div class="ratio ratio-16x9 rounded-3 overflow-hidden border">
-              <iframe
-                title="Mapa de Medellín"
-                src="https://www.google.com/maps?q=Medell%C3%ADn%2C%20Antioquia&output=embed"
-                allowfullscreen
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <div class="mt-3">
-              <span class="accent-pill"><i class="las la-gift me-1"></i> Mesa de regalos disponible en el lugar</span>
-            </div>
+            <p class="text-muted-mb-2">Casa Cruz Eventos, sector Llano Grande, Rionegro – Antioquia</p>
+<!-- Mapa embebido -->
+<div style="width: 100%; height: 400px;">
+  <a href="https://maps.app.goo.gl/kwvZmUVH7A8ZPriF7?g_st=ic" target="_blank" style="display:block; width:100%; height:100%;">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10063.03424454698!2d-75.419666!3d6.149806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e469fffe5213e99%3A0x96c052708a086b01!2sCASA%20CRUZ%2C%20Rionegro%2C%20Antioquia!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco"
+      width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </a>
+</div>
           </div>
         </div>
+		       <div class="col-lg-6" data-aos="fade-left">
+  <div class="card-glass overflow-hidden p-2">
+    <div id="eventoCarousel" class="carousel slide" data-bs-ride="carousel">
+      <p class="lead-muted mb-4">&nbsp;</p>
+	  <h2 class="section-cuenta-regresiva">Fotos del lugar</h2>
+      <!-- Imágenes -->
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="Inicio_files/fotos/lugar.jpg" class="d-block w-100" alt="Lugar del evento">
+        </div>
+        <div class="carousel-item">
+          <img src="Inicio_files/fotos/lugar2.jpeg" class="d-block w-100" alt="Lugar del evento">
+        </div>
+        <div class="carousel-item">
+<img src="Inicio_files/fotos/lugar3.jpeg" class="d-block w-100" alt="Lugar del evento">
+        </div>
+      </div>
+
+      <!-- Flechas -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#eventoCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#eventoCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+
+    </div>
+  </div>
+</div>
       </div>
     </div>
   </section>
 
+
+
   <!-- FOOTER -->
   <footer class="py-4">
     <div class="container text-center">
-      <p class="mb-1">Con cariño, Cristian & Elizabeth</p>
+      <p class="mb-1">Con cariño, Cris & Eli</p>
       <p class="mb-0"><span class="footer-heart">♥</span> 26 de abril de 2026</p>
     </div>
   </footer>
@@ -1713,7 +1973,18 @@ confirmBtn.addEventListener("click", async () => {
 });
 </script>
 
-
+<script>
+  document.getElementById('SeeMan').addEventListener('click', function() {
+    // Cambia esta URL por la de Pinterest que quieras
+    window.location.href = 'https://pin.it/30a39TKLy';
+  });
+</script>
+<script>
+  document.getElementById('SeeWoman').addEventListener('click', function() {
+    // Cambia esta URL por la de Pinterest que quieras
+    window.location.href = 'https://pin.it/334lnTmeE';
+  });
+</script>
 
 </body>
 </html>
