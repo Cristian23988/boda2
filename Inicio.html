@@ -1175,7 +1175,38 @@ body::after {
   }
 }
 
+.btn-group-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  align-items: center;
+}
 
+/* botones */
+.btn-group-vertical .btn {
+  width: 100%;          /* ocupa todo el ancho disponible */
+  max-width: 320px;     /* no crecen demasiado en desktop */
+  min-width: 260px;     /* 🔥 evita que se encojan */
+  padding: 14px 18px;   /* más aire */
+  font-size: 16px;
+  white-space: nowrap; /* evita salto de línea */
+}
+@media (max-width: 480px) {
+  .btn-group-vertical .btn {
+    min-width: 90vw;   /* casi todo el ancho del móvil */
+    font-size: 15px;
+  }
+}
+
+.gift-qr {
+  width: 100%;        /* Se adapta al ancho del contenedor */
+  max-width: 200px;   /* Máximo tamaño que puede tener */
+  height: auto;       /* Mantiene proporción */
+  border-radius: 12px;
+  margin: 10px auto;  /* Centra horizontalmente */
+  display: block;
+}
 
   </style>
 </head>
@@ -1500,36 +1531,24 @@ Eclesiastés 4:12
 
   <h3 class="section-title">Paleta de Colores</h3>
   <div class="color-palette">
-  <!-- HOMBRES -->
+
+  <!-- Colores -->
   <div class="palette-group">
-    <p class="palette-title">Hombres</p>
     <div class="color-palette">
-      <span class="color-circle beige"></span>
+	<span class="color-circle beige"></span>
       <span class="color-circle brown"></span>
       <span class="color-circle black"></span>
-      <span class="color-circle gray"></span>
-    </div>
-		  <button id="SeeMan" class="btn btn-accent"> Ejemplo hombre</button>
-
-		  
-    <p class="palette-note small">
-      Evitar tonos verdes, vino o sus derivaciones.
-    </p>
-  </div>
-
-  <!-- MUJERES -->
-  <div class="palette-group">
-    <p class="palette-title">Mujeres</p>
-    <div class="color-palette">
       <span class="color-circle rose"></span>
       <span class="color-circle lavender"></span>
       <span class="color-circle gray"></span>
-      <span class="color-circle brown"></span>
+
     </div>
-			  <button id="SeeWoman" class="btn btn-accent"> Ejemplo mujer</button>
-			  
+<div class="btn-group-vertical">
+  <button id="SeeMan" class="btn btn-accent">Idea para ellos</button>
+  <button id="SeeWoman" class="btn btn-accent">Idea para ellas</button>
+</div>
     <p class="palette-note small">
-      Evitar blanco, rojo y tonos terracota.
+      Evitar blanco, verde, vino, rojo y tonos terracota.
     </p>
 	
   </div>
@@ -1542,70 +1561,37 @@ Eclesiastés 4:12
 
           </div>
         </div>
+			
+  <!-- adicional -->
+  <section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="card-glass p-4 p-md-5 h-100">
+          
+          <!-- Confirmación de asistencia -->
+          <h2 class="section-cuenta-regresiva">Información adicional</h2>
+
+            <p class="text-muted mb-2">
+              Queremos compartir este día tan especial con personas que admiramos profundamente. Con mucho amor hemos planeado nuestra boda como un encuentro exclusivamente para adultos, esperando que puedan disfrutarla tanto como nosotros.
+            </p>
+            
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+		
+		
+		
       </div>
     </div>
   </section>
 
 <!--SEPARADOR-->
-<div class="separator-elegant">
-  <div class="decor">♥</div>
-</div>
-
-
-
-
-  <!-- RSVP -->
-  <section id="rsvp" class="section">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-6" data-aos="fade-right">
-          <div class="card-glass p-4 p-md-5 h-100">
-            <h2 class="section-cuenta-regresiva">Confirmación de asistencia</h2>
-            <p class="text-muted mb-2">Por favor completa tus datos para reservar tu lugar.</p>
-			
-			
-			
-			
-<form id="rsvpForm" style="max-width:400px; margin:auto; font-family: 'Arial', sans-serif;">
-  <label for="familyCode" style="font-weight:bold;">Código familiar</label>
-  <input type="text" id="familyCode" placeholder="Ej: FA1235" required style="width:100%; padding:8px; margin:5px 0 12px 0; font-size:16px; border-radius:5px; border:1px solid #ccc;">
-
-  <!-- BOTÓN 1: VALIDAR -->
-<button type="button" id="validateBtn">Validar Código</button>
-
-  <!-- INVITADOS -->
-  <div id="familyMembers" style="display:none; margin-top:15px; padding:10px; background:#f3f3f3; border-radius:6px;">
-    <!-- Checkboxes se llenan aquí -->
-  </div>
-
-  <!-- BOTÓN 2: CONFIRMAR ASISTENCIA (invisible hasta validar) -->
-  <button type="button" id="confirmBtn" style="
-    display:none;
-    width:100%; 
-    margin-top:12px;
-    padding:10px; 
-    background:#1e73be; 
-    color:#fff; 
-    font-weight:bold; 
-    border:none; 
-    border-radius:6px; 
-    cursor:pointer;
-    transition: background .3s;
-  ">Confirmar Asistencia</button>
-</form>
-
-<pre id="result" style="margin-top:15px; background:#eee; padding:10px; border-radius:6px; font-size:14px;"></pre>
-
-
-
-<pre id="result"></pre>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-  <!--SEPARADOR-->
 <div class="separator-elegant">
   <div class="decor">♥</div>
 </div>
@@ -1661,6 +1647,100 @@ Eclesiastés 4:12
     </div>
   </div>
 </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!--SEPARADOR-->
+<div class="separator-elegant">
+  <div class="decor">♥</div>
+</div>
+
+  <!-- REGALOS -->
+  <section id="rsvp" class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="card-glass p-4 p-md-5 h-100">
+          
+          <!-- Confirmación de asistencia -->
+          <h2 class="section-cuenta-regresiva">Mesa de regalos</h2>
+          <!-- Mesa de regalos -->
+          <div class="gift-section">
+            <p class="gift-text">
+              Si deseas contribuir, puedes escanear el QR o usar la cuenta bancaria a continuación.
+            </p>
+            <img src="Inicio_files/fotos/qrbr.jpeg" alt="QR Mesa de regalos" class="gift-qr">
+            <p class="gift-account">
+              Nequi: 3126339881 <br>
+              
+            </p>
+            <p class="gift-note">
+              También puedes realizarlo en el lugar durante la lluvia de sobres 💌
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!--SEPARADOR-->
+<div class="separator-elegant">
+  <div class="decor">♥</div>
+</div>
+
+  <!-- RSVP -->
+  <section id="rsvp" class="section">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="card-glass p-4 p-md-5 h-100">
+            <h2 class="section-cuenta-regresiva">Confirmación de asistencia</h2>
+            <p class="text-muted mb-2">Por favor completa tus datos para reservar tu lugar.</p>
+			
+			
+			
+			
+<form id="rsvpForm" style="max-width:400px; margin:auto; font-family: 'Arial', sans-serif;">
+  <label for="familyCode" style="font-weight:bold;">Código familiar</label>
+  <input type="text" id="familyCode" placeholder="Ej: FA1235" required style="width:100%; padding:8px; margin:5px 0 12px 0; font-size:16px; border-radius:5px; border:1px solid #ccc;">
+
+  <!-- BOTÓN 1: VALIDAR -->
+<button type="button" id="validateBtn">Validar Código</button>
+
+  <!-- INVITADOS -->
+  <div id="familyMembers" style="display:none; margin-top:15px; padding:10px; background:#f3f3f3; border-radius:6px;">
+    <!-- Checkboxes se llenan aquí -->
+  </div>
+
+  <!-- BOTÓN 2: CONFIRMAR ASISTENCIA (invisible hasta validar) -->
+  <button type="button" id="confirmBtn" style="
+    display:none;
+    width:100%; 
+    margin-top:12px;
+    padding:10px; 
+    background:#1e73be; 
+    color:#fff; 
+    font-weight:bold; 
+    border:none; 
+    border-radius:6px; 
+    cursor:pointer;
+    transition: background .3s;
+  ">Confirmar Asistencia</button>
+</form>
+
+<pre id="result" style="margin-top:15px; background:#eee; padding:10px; border-radius:6px; font-size:14px;"></pre>
+
+
+
+<pre id="result"></pre>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
