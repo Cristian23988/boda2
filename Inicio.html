@@ -563,7 +563,6 @@
   min-height: 70vh;
   display: block;        /* 🔑 NO FLEX */
   padding: 80px 16px;    /* controla respiración */
-  overflow: hidden;
 }
 
 /* VIDEO COMO BACKGROUND REAL */
@@ -572,11 +571,11 @@ position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  
+  height: 100vh; /* toda la pantalla */
   object-fit: cover; /* llena sin dejar espacios */
   object-position: center;
-  z-index: 0;
-  pointer-events: none;
+  z-index: -1;
+
 }
 
 
@@ -1312,17 +1311,14 @@ body::after {
 </div>-->
 
 <!-- VIDEO DE FONDO (COMO GIF) -->
-<video
-  class="story-bg-video"
-  autoplay
-  muted
-  loop
-  playsinline
-  preload="auto"
-  poster="https://via.placeholder.com/1920x1080/000000/000000">
+<video class="story-bg-video"
+       autoplay
+       muted
+       loop
+       playsinline
+       preload="metadata"
+       style="width:100%; height:100%; object-fit:cover;">
 </video>
-
-
   <div class="story-content" data-aos="fade-up">
    <h2 class="section-title text-center">Un Momento Especial</h2>
     <p class="section-text">
@@ -1899,33 +1895,26 @@ Si Dios pone en tu corazón bendecirnos, recibiremos con gratitud lluvia de sobr
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const video = document.querySelector(".story-bg-video");
-  if (!video) return;
+const video = document.querySelector('.story-bg-video');
+const display = document.getElementById('fileNameDisplay');
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+// Detectar si es móvil
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  const fullHD = "https://github.com/Cristian23988/boda2/releases/download/v1.1/fondoGif.mp4";
-  const mobile720 = "https://github.com/Cristian23988/boda2/releases/download/v1.1/720.mp4";
+// Archivos según dispositivo
+const fullHD = "https://github.com/Cristian23988/boda2/releases/download/v1.1/fondoGif.m4v";
+const mobile720 = "https://github.com/Cristian23988/boda2/releases/download/v1.1/720.m4v";
 
-  video.src = isMobile ? mobile720 : fullHD;
+const selectedVideo = isMobile ? mobile720 : fullHD;
 
-  const safePlay = () => {
-    const p = video.play();
-    if (p !== undefined) p.catch(() => {});
-  };
+// Asignar video y mostrar nombre automáticamente
+video.src = selectedVideo;
+video.load();
+video.play().catch(()=>{});
 
-  // intento automático
-  safePlay();
-
-  // desbloqueo al primer gesto (SIN romper visibilidad)
-  ["click","touchstart","wheel","scroll"].forEach(evt => {
-    window.addEventListener(evt, safePlay, { once: true });
-  });
-});
+const fileName = selectedVideo.split("/").pop();
+display.textContent = "Video en uso: " + fileName;
 </script>
-
-
 <script>
 
 document.addEventListener("DOMContentLoaded", () => {
