@@ -1895,26 +1895,35 @@ Si Dios pone en tu corazón bendecirnos, recibiremos con gratitud lluvia de sobr
 </script>
 
 <script>
-const video = document.querySelector('.story-bg-video');
-const display = document.getElementById('fileNameDisplay');
+(() => {
+  const video = document.querySelector('.story-bg-video');
+  if (!video) return;
 
-// Detectar si es móvil
-const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-// Archivos según dispositivo
-const fullHD = "https://github.com/Cristian23988/boda2/releases/download/v1.1/fondoGif.m4v";
-const mobile720 = "https://github.com/Cristian23988/boda2/releases/download/v1.1/720.m4v";
+  // tus videos
+  const videoDesktop = "https://github.com/Cristian23988/boda2/releases/download/v1.1/fondoGif.mp4";
+  const videoMobile  = "https://github.com/Cristian23988/boda2/releases/download/v1.1/720.mp4";
 
-const selectedVideo = isMobile ? mobile720 : fullHD;
+  video.src = isMobile ? videoMobile : videoDesktop;
 
-// Asignar video y mostrar nombre automáticamente
-video.src = selectedVideo;
-video.load();
-video.play().catch(()=>{});
+  const tryPlay = () => {
+    video.muted = true; // 🔑 obligatorio
+    const p = video.play();
+    if (p !== undefined) p.catch(() => {});
+  };
 
-const fileName = selectedVideo.split("/").pop();
-display.textContent = "Video en uso: " + fileName;
+  // 1️⃣ intenta apenas carga
+  window.addEventListener('load', tryPlay);
+
+  // 2️⃣ primer gesto del usuario (INVISIBLE)
+  ['touchstart','click','scroll','wheel'].forEach(evt => {
+    window.addEventListener(evt, tryPlay, { once: true, passive: true });
+  });
+
+})();
 </script>
+
 <script>
 
 document.addEventListener("DOMContentLoaded", () => {
