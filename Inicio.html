@@ -1215,6 +1215,27 @@ body::after {
 
       margin-bottom: 18px;
     }
+.btn-cuenta {
+  background-color: #b85c38;
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s ease;
+}
+
+.btn-cuenta:hover {
+  background-color: #9e4c2d;
+}
+
+.cuenta-oculta {
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+}
 
   </style>
 </head>
@@ -1675,22 +1696,24 @@ Eclesiastés 4:12
         <div class="card-glass p-4 p-md-5 h-100">
           
           <!-- Confirmación de asistencia -->
-          <h2 class="section-cuenta-regresiva">Mesa de regalos</h2>
+          <h2 class="section-cuenta-regresiva">Regalos</h2>
           <!-- Mesa de regalos -->
           <div class="gift-section">
             <p class="gift-text">
               Tu presencia es nuestro mejor regalo.
-Si Dios pone en tu corazón bendecirnos, recibiremos con gratitud lluvia de sobres o transferencias.
+Si Dios pone en tu corazón bendecirnos, recibiremos con gratitud lluvia de sobres o transferencias 💌.
             </p>
-            <img src="Inicio_files/fotos/qrbr.jpeg" alt="QR Mesa de regalos" class="gift-qr">
-            <p class="gift-account">
-              Nequi: 3126339881 <br>
-              
-            </p>
-            <p class="gift-note">
-              También puedes realizarlo en el lugar durante la lluvia de sobres 💌
-            </p>
-          </div>
+<button class="btn-cuenta" onclick="toggleCuenta()">
+  Cuenta bancaria
+</button>
+
+<div id="cuenta-bancaria" class="cuenta-oculta">
+  <img src="Inicio_files/fotos/qrbr.jpeg" alt="QR Mesa de regalos" class="gift-qr">
+  <p class="gift-account">
+    Nequi: 3126339881 <br>
+  </p>
+</div>
+
 
         </div>
       </div>
@@ -1742,7 +1765,7 @@ Si Dios pone en tu corazón bendecirnos, recibiremos con gratitud lluvia de sobr
     cursor:pointer;
     transition: background .3s;
   ">Confirmar Asistencia</button>
-  <p class="text-muted mb-2">Por favor, realiza la confirmación una sola vez y espera a que se indique que tu proceso se completó correctamente.</p>
+  <p class="text-muted mb-2">Por favor realiza la confirmación una sola vez y espera a que se indique que tu proceso se completó correctamente.</p>
 </form>
 
 <pre id="result" style="margin-top:15px; background:#eee; padding:10px; border-radius:6px; font-size:14px;"></pre>
@@ -2074,6 +2097,14 @@ confirmBtn.addEventListener("click", async () => {
     // Cambia esta URL por la de Pinterest que quieras
     window.location.href = 'https://pin.it/334lnTmeE';
   });
+</script>
+<script>
+  function toggleCuenta() {
+    const cuenta = document.getElementById('cuenta-bancaria');
+    cuenta.style.display = cuenta.style.display === 'none' || cuenta.style.display === ''
+      ? 'block'
+      : 'none';
+  }
 </script>
 
 </body>
