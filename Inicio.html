@@ -1314,16 +1314,12 @@ body::after {
 <!-- VIDEO DE FONDO (COMO GIF) -->
 <video
   class="story-bg-video"
-  autoplay
   muted
   loop
   playsinline
-  preload="auto"
-  aria-hidden="true"
-  tabindex="-1"
-  disablePictureInPicture
-  controlslist="nodownload nofullscreen noremoteplayback">
+  preload="auto">
 </video>
+
 
   <div class="story-content" data-aos="fade-up">
    <h2 class="section-title text-center">Un Momento Especial</h2>
@@ -1907,43 +1903,34 @@ Si Dios pone en tu corazón bendecirnos, recibiremos con gratitud lluvia de sobr
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  const fullHD = "https://github.com/Cristian23988/boda2/releases/download/v1.1/fondoGif.m4v";
-  const mobile720 = "https://www.w3schools.com/html/mov_bbb.mp4";
+  const fullHD = "https://github.com/Cristian23988/boda2/releases/download/v1.1/fondoGif.mp4";
+  const mobile720 = "https://github.com/Cristian23988/boda2/releases/download/v1.1/720.mp4";
 
   video.src = isMobile ? mobile720 : fullHD;
-
   video.muted = true;
   video.playsInline = true;
-  video.autoplay = true;
   video.loop = true;
 
-  const forcePlay = () => {
-    if (video.paused) {
-      video.play().catch(()=>{});
-	  video.setAttribute("muted", "");
-video.muted = true;
-
-    }
+  const tryPlay = () => {
+    video.play().catch(() => {});
   };
 
-  // Autoplay al cargar
-  window.addEventListener('load', forcePlay);
+  // intento automático (a veces funciona)
+  window.addEventListener('load', tryPlay);
 
-  // Autoplay cuando entra por scroll (CLAVE)
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        forcePlay();
-      }
-    });
-  }, { threshold: 0.25 });
+  // 🔑 GARANTÍA ABSOLUTA: primer gesto del usuario
+  const unlock = () => {
+    tryPlay();
+    window.removeEventListener('touchstart', unlock);
+    window.removeEventListener('click', unlock);
+    window.removeEventListener('wheel', unlock);
+    window.removeEventListener('scroll', unlock);
+  };
 
-  observer.observe(video);
-
-  // Reforzar al volver a la pestaña
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) forcePlay();
-  });
+  window.addEventListener('touchstart', unlock, { once: true });
+  window.addEventListener('click', unlock, { once: true });
+  window.addEventListener('wheel', unlock, { once: true });
+  window.addEventListener('scroll', unlock, { once: true });
 })();
 </script>
 
