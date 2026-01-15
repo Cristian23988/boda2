@@ -575,7 +575,7 @@ position: absolute;
   
   object-fit: cover; /* llena sin dejar espacios */
   object-position: center;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
 }
 
@@ -1314,10 +1314,12 @@ body::after {
 <!-- VIDEO DE FONDO (COMO GIF) -->
 <video
   class="story-bg-video"
+  autoplay
   muted
   loop
   playsinline
-  preload="auto">
+  preload="auto"
+  poster="https://via.placeholder.com/1920x1080/000000/000000">
 </video>
 
 
@@ -1897,8 +1899,8 @@ Si Dios pone en tu corazón bendecirnos, recibiremos con gratitud lluvia de sobr
 </script>
 
 <script>
-(() => {
-  const video = document.querySelector('.story-bg-video');
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.querySelector(".story-bg-video");
   if (!video) return;
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -1907,31 +1909,20 @@ Si Dios pone en tu corazón bendecirnos, recibiremos con gratitud lluvia de sobr
   const mobile720 = "https://github.com/Cristian23988/boda2/releases/download/v1.1/720.mp4";
 
   video.src = isMobile ? mobile720 : fullHD;
-  video.muted = true;
-  video.playsInline = true;
-  video.loop = true;
 
-  const tryPlay = () => {
-    video.play().catch(() => {});
+  const safePlay = () => {
+    const p = video.play();
+    if (p !== undefined) p.catch(() => {});
   };
 
-  // intento automático (a veces funciona)
-  window.addEventListener('load', tryPlay);
+  // intento automático
+  safePlay();
 
-  // 🔑 GARANTÍA ABSOLUTA: primer gesto del usuario
-  const unlock = () => {
-    tryPlay();
-    window.removeEventListener('touchstart', unlock);
-    window.removeEventListener('click', unlock);
-    window.removeEventListener('wheel', unlock);
-    window.removeEventListener('scroll', unlock);
-  };
-
-  window.addEventListener('touchstart', unlock, { once: true });
-  window.addEventListener('click', unlock, { once: true });
-  window.addEventListener('wheel', unlock, { once: true });
-  window.addEventListener('scroll', unlock, { once: true });
-})();
+  // desbloqueo al primer gesto (SIN romper visibilidad)
+  ["click","touchstart","wheel","scroll"].forEach(evt => {
+    window.addEventListener(evt, safePlay, { once: true });
+  });
+});
 </script>
 
 
