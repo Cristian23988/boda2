@@ -563,6 +563,7 @@
   min-height: 70vh;
   display: block;        /* 🔑 NO FLEX */
   padding: 80px 16px;    /* controla respiración */
+  overflow: hidden;
 }
 
 /* VIDEO COMO BACKGROUND REAL */
@@ -1919,6 +1920,9 @@ Si Dios pone en tu corazón bendecirnos, recibiremos con gratitud lluvia de sobr
   const forcePlay = () => {
     if (video.paused) {
       video.play().catch(()=>{});
+	  video.setAttribute("muted", "");
+video.muted = true;
+
     }
   };
 
