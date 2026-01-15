@@ -574,7 +574,7 @@ position: absolute;
   height: 100vh; /* toda la pantalla */
   object-fit: cover; /* llena sin dejar espacios */
   object-position: center;
-  z-index: -1;
+  z-index: 0;
 
 }
 
@@ -1312,12 +1312,10 @@ body::after {
 
 <!-- VIDEO DE FONDO (COMO GIF) -->
 <video class="story-bg-video"
-       autoplay
        muted
        loop
        playsinline
-       preload="metadata"
-       style="width:100%; height:100%; object-fit:cover;">
+       preload="auto">
 </video>
   <div class="story-content" data-aos="fade-up">
    <h2 class="section-title text-center">Un Momento Especial</h2>
@@ -1895,33 +1893,62 @@ Si Dios pone en tu corazón bendecirnos, recibiremos con gratitud lluvia de sobr
 </script>
 
 <script>
-(() => {
-  const video = document.querySelector('.story-bg-video');
+document.addEventListener("DOMContentLoaded", function () {
+
+  const video = document.querySelector(".story-bg-video");
   if (!video) return;
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  // 📱 Detectar móvil
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  // tus videos
-  const videoDesktop = "https://github.com/Cristian23988/boda2/releases/download/v1.1/fondoGif.mp4";
-  const videoMobile  = "https://github.com/Cristian23988/boda2/releases/download/v1.1/720.mp4";
+  // 🎥 TUS VIDEOS (NO CAMBIAR)
+  const videoWeb = "https://github.com/Cristian23988/boda2/releases/download/v1.1/fondoGif.m4v";
+  const videoMobile = "https://github.com/Cristian23988/boda2/releases/download/v1.1/720.m4v";
 
-  video.src = isMobile ? videoMobile : videoDesktop;
+  // 👉 Elegir según dispositivo
+  const selectedVideo = isMobile ? videoMobile : videoWeb;
 
-  const tryPlay = () => {
-    video.muted = true; // 🔑 obligatorio
-    const p = video.play();
-    if (p !== undefined) p.catch(() => {});
-  };
+  // ⚙️ Configuración OBLIGATORIA
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.controls = false;
+  video.preload = "auto";
 
-  // 1️⃣ intenta apenas carga
-  window.addEventListener('load', tryPlay);
+  // 🔗 Asignar src UNA SOLA VEZ
+  video.src = selectedVideo;
+  video.load();
 
-  // 2️⃣ primer gesto del usuario (INVISIBLE)
-  ['touchstart','click','scroll','wheel'].forEach(evt => {
-    window.addEventListener(evt, tryPlay, { once: true, passive: true });
-  });
+  /* =========================
+     🖥️ WEB — AUTOPLAY REAL
+     ========================= */
+  if (!isMobile) {
+    video.autoplay = true;
 
-})();
+    video.play().catch(() => {
+      console.warn("Autoplay bloqueado en web");
+    });
+  }
+
+  /* =========================
+     📱 MÓVIL — SIN BOTÓN DE PLAY
+     ========================= */
+  if (isMobile) {
+    video.autoplay = false;
+
+    const startVideo = () => {
+      video.play().then(() => {
+        document.removeEventListener("touchstart", startVideo);
+        document.removeEventListener("click", startVideo);
+      }).catch(() => {});
+    };
+
+    // 🔑 Primer gesto válido (requerido por móviles)
+    document.addEventListener("touchstart", startVideo, { once: true });
+    document.addEventListener("click", startVideo, { once: true });
+  }
+
+});
 </script>
 
 <script>
